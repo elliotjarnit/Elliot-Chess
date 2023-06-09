@@ -1,0 +1,3 @@
+[submodule "ElliotEngine"]
+	path = ElliotEngine
+	url = https://github.com/Swiftzerr/ElliotEngine

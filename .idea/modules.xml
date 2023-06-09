@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Elliot-Chess.iml" filepath="$PROJECT_DIR$/Elliot-Chess.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ElliotEngine/ElliotEngine.iml" filepath="$PROJECT_DIR$/ElliotEngine/ElliotEngine.iml" />
+    </modules>
+  </component>
+</project>
