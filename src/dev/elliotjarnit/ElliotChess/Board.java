@@ -13,6 +13,7 @@ import dev.elliotjarnit.ElliotEngine.Objects.EObject;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 
 public class Board extends EObject {
     private final Piece[][] squares;
@@ -23,6 +24,7 @@ public class Board extends EObject {
         try {
             String[] data = FileHandler.loadFile(modelPath);
             EFace[] faces = ObjHandler.loadData(data);
+            System.out.println(Arrays.toString(faces));
             this.setFaces(faces);
         } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {
             e.printStackTrace();
@@ -48,8 +50,10 @@ public class Board extends EObject {
         int index = 0;
         for (Piece[] row : squares) {
             for (Piece piece : row) {
-                pieces[index] = piece;
-                index++;
+                if (piece != null) {
+                    pieces[index] = piece;
+                    index++;
+                }
             }
         }
         return pieces;
