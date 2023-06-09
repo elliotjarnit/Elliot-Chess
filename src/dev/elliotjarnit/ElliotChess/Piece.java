@@ -1,25 +1,39 @@
 package dev.elliotjarnit.ElliotChess;
 
-public abstract class Piece {
-    private boolean isWhite;
-    private int x;
-    private int y;
+import dev.elliotjarnit.ElliotEngine.Objects.EEntity;
+import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
 
-    public Piece(boolean isWhite, int x, int y) {
-        this.isWhite = isWhite;
-        this.x = x;
-        this.y = y;
+public abstract class Piece extends EEntity {
+    private Side side;
+    private Vector2 boardPosition;
+
+    public Piece(Side side, Vector2 boardPosition) {
+        this.side = side;
+        this.boardPosition = boardPosition;
     }
 
-    public boolean isWhite() {return isWhite;}
+    public abstract boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board);
 
-    public int getX() {return x;}
+    public int getX() {
+        return (int) boardPosition.x;
+    }
+    public void setX(int x) {
+        this.boardPosition.x = x;
+    }
 
-    public int getY() {return y;}
+    public int getY() {
+        return (int) boardPosition.y;
+    }
+    public void setY(int y) {
+        this.boardPosition.y = y;
+    }
 
-    public void setX(int x) {this.x = x;}
+    public Side getSide() {
+        return side;
+    }
 
-    public void setY(int y) {this.y = y;}
-
-    public abstract boolean isValidMove(int startX, int startY, int endX, int endY, Board brd);
+    public enum Side {
+        WHITE,
+        BLACK
+    }
 }

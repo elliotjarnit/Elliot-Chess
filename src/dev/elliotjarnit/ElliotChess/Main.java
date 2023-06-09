@@ -1,6 +1,8 @@
 package dev.elliotjarnit.ElliotChess;
 
 import dev.elliotjarnit.ElliotEngine.ElliotEngine;
+import dev.elliotjarnit.ElliotEngine.Objects.EScene;
+
 public class Main extends ElliotEngine {
     public static void main(String[] args) {
         Main engine = new Main();
@@ -20,7 +22,13 @@ public class Main extends ElliotEngine {
 
     @Override
     public void setup() {
-
+        EScene mainScene = new EScene();
+        Board gameBoard = new Board();
+        mainScene.addObject(gameBoard);
+        for (Piece piece : gameBoard.getPieces()) {
+            mainScene.addObject(piece);
+        }
+        this.setScene(mainScene);
     }
 
     @Override
