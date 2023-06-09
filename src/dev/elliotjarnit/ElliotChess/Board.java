@@ -6,6 +6,7 @@ import dev.elliotjarnit.ElliotChess.Pieces.Bishop;
 import dev.elliotjarnit.ElliotChess.Pieces.Queen;
 import dev.elliotjarnit.ElliotChess.Pieces.King;
 import dev.elliotjarnit.ElliotChess.Pieces.Pawn;
+import dev.elliotjarnit.ElliotEngine.Graphics.Color;
 import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
 import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;
 import dev.elliotjarnit.ElliotEngine.Objects.EFace;
@@ -24,7 +25,9 @@ public class Board extends EObject {
         try {
             String[] data = FileHandler.loadFile(modelPath);
             EFace[] faces = ObjHandler.loadData(data);
-            System.out.println(Arrays.toString(faces));
+            for (EFace face : faces) {
+                face.setColor(new Color(204, 204, 204));
+            }
             this.setFaces(faces);
         } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {
             e.printStackTrace();

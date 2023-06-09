@@ -1,10 +1,12 @@
 package dev.elliotjarnit.ElliotChess;
 
+import dev.elliotjarnit.ElliotEngine.Graphics.Color;
 import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
 import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;
 import dev.elliotjarnit.ElliotEngine.Objects.EEntity;
 import dev.elliotjarnit.ElliotEngine.Objects.EFace;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
+import dev.elliotjarnit.ElliotEngine.Utils.Vector3;
 
 import java.io.FileNotFoundException;
 
@@ -13,6 +15,7 @@ public abstract class Piece extends EEntity {
     private Vector2 boardPosition;
 
     public Piece(Side side, Vector2 boardPosition) {
+        super(new Vector3(0, 10, 0));
         this.side = side;
         this.boardPosition = boardPosition;
 
@@ -20,6 +23,9 @@ public abstract class Piece extends EEntity {
         try {
             String[] data = FileHandler.loadFile(modelPath);
             EFace[] faces = ObjHandler.loadData(data);
+            for (EFace face : faces) {
+                face.setColor(side == Side.WHITE ? Color.WHITE : Color.BLACK);
+            }
             this.setFaces(faces);
         } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {
             e.printStackTrace();
