@@ -1,3 +1,12 @@
+package dev.elliotjarnit.ElliotChess;
+
+import dev.elliotjarnit.ElliotChess.Pieces.Rook;
+import dev.elliotjarnit.ElliotChess.Pieces.Knight;
+import dev.elliotjarnit.ElliotChess.Pieces.Bishop;
+import dev.elliotjarnit.ElliotChess.Pieces.Queen;
+import dev.elliotjarnit.ElliotChess.Pieces.King;
+import dev.elliotjarnit.ElliotChess.Pieces.Pawn;
+
 public class Board
 {
     private Piece[][] squares;

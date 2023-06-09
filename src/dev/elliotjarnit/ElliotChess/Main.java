@@ -1,3 +1,5 @@
+package dev.elliotjarnit.ElliotChess;
+
 import dev.elliotjarnit.ElliotEngine.ElliotEngine;
 public class Main extends ElliotEngine {
     public static void main(String[] args) {

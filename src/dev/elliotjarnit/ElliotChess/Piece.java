@@ -1,3 +1,5 @@
+package dev.elliotjarnit.ElliotChess;
+
 public abstract class Piece {
     private boolean isWhite;
     private int x;
