@@ -12,6 +12,8 @@ import dev.elliotjarnit.ElliotEngine.Window.InputManager;
 public class Main extends ElliotEngine {
     private boolean freeMove = true;
     private ECamera camera;
+    private Board gameBoard;
+    private Piece selectedPiece;
 
     public static void main(String[] args) {
         Main engine = new Main();
@@ -39,7 +41,7 @@ public class Main extends ElliotEngine {
 //        camera.setRotationDegrees(new Vector2(-34.2, 62.5));
         camera = new ECamera(new Vector3(9.1, 216, 25.5));
         camera.setRotationDegrees(new Vector2(-90, 0));
-        Board gameBoard = new Board();
+        gameBoard = new Board();
         mainScene.addObject(gameBoard);
         for (BoardSquare square : gameBoard.getBoardSquares()) {
             mainScene.addObject(square);
@@ -94,12 +96,33 @@ public class Main extends ElliotEngine {
         Vector2 mousePos = this.inputManager.getMousePos();
 
         if (this.inputManager.isMouseDown(InputManager.MouseButton.LEFT)) {
-            EObject object = this.renderer.getLookingAtObject(mousePos);
+            EObject object = this.renderer.getLookingAtObject(mousePos.sub(new Vector2(0, 34)));
 
-            System.out.println(object);
+            if (object instanceof Piece) {
+                selectedPiece = (Piece) object;
+                System.out.println("Selected piece: " + selectedPiece);
+                setAvailableMoves();
+            }
+//            else if (object instanceof BoardSquare) {
+//                if (selectedPiece != null) {
+//                    BoardSquare square = (BoardSquare) object;
+//                    System.out.println("Selected square: " + square);
+//                    selectedPiece.moveTo(square);
+//                    selectedPiece = null;
+//                }
+//            }
+        }
+    }
 
-            if (object.getClass() == BoardSquare.class) {
-                object.setColor(Color.RED);
+    public void setAvailableMoves() {
+        for (BoardSquare square : gameBoard.getBoardSquares()) {
+            square.setDefaultColor();
+        }
+
+        BoardSquare[] squares = gameBoard.getBoardSquares();
+        for (BoardSquare square : squares) {
+            if (selectedPiece.isValidMove(new Vector2(selectedPiece.getX(), selectedPiece.getY()), new Vector2(square.getBoardPosition().x, square.getBoardPosition().y), gameBoard)) {
+                square.setColor(Color.RED);
             }
         }
     }

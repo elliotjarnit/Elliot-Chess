@@ -74,26 +74,26 @@ public class Board extends EObject {
         }
 
         squares[0][0] = new Rook(Piece.Side.WHITE, new Vector2(0, 0));
-        squares[0][1] = new Knight(Piece.Side.WHITE, new Vector2(0, 1));
-        squares[0][2] = new Bishop(Piece.Side.WHITE, new Vector2(0, 2));
-        squares[0][3] = new Queen(Piece.Side.WHITE, new Vector2(0, 3));
-        squares[0][4] = new King(Piece.Side.WHITE, new Vector2(0, 4));
-        squares[0][5] = new Bishop(Piece.Side.WHITE, new Vector2(0, 5));
-        squares[0][6] = new Knight(Piece.Side.WHITE, new Vector2(0, 6));
-        squares[0][7] = new Rook(Piece.Side.WHITE, new Vector2(0, 7));
+        squares[1][0] = new Knight(Piece.Side.WHITE, new Vector2(0, 1));
+        squares[2][0] = new Bishop(Piece.Side.WHITE, new Vector2(0, 2));
+        squares[3][0] = new Queen(Piece.Side.WHITE, new Vector2(0, 3));
+        squares[4][0] = new King(Piece.Side.WHITE, new Vector2(0, 4));
+        squares[5][0] = new Bishop(Piece.Side.WHITE, new Vector2(0, 5));
+        squares[6][0] = new Knight(Piece.Side.WHITE, new Vector2(0, 6));
+        squares[7][0] = new Rook(Piece.Side.WHITE, new Vector2(0, 7));
 
-        squares[7][0] = new Rook(Piece.Side.BLACK, new Vector2(7, 0));
-        squares[7][1] = new Knight(Piece.Side.BLACK, new Vector2(7, 1));
-        squares[7][2] = new Bishop(Piece.Side.BLACK, new Vector2(7, 2));
-        squares[7][3] = new Queen(Piece.Side.BLACK, new Vector2(7, 3));
-        squares[7][4] = new King(Piece.Side.BLACK, new Vector2(7, 4));
-        squares[7][5] = new Bishop(Piece.Side.BLACK, new Vector2(7, 5));
-        squares[7][6] = new Knight(Piece.Side.BLACK, new Vector2(7, 6));
+        squares[0][7] = new Rook(Piece.Side.BLACK, new Vector2(7, 0));
+        squares[1][7] = new Knight(Piece.Side.BLACK, new Vector2(7, 1));
+        squares[2][7] = new Bishop(Piece.Side.BLACK, new Vector2(7, 2));
+        squares[3][7] = new Queen(Piece.Side.BLACK, new Vector2(7, 3));
+        squares[4][7] = new King(Piece.Side.BLACK, new Vector2(7, 4));
+        squares[5][7] = new Bishop(Piece.Side.BLACK, new Vector2(7, 5));
+        squares[6][7] = new Knight(Piece.Side.BLACK, new Vector2(7, 6));
         squares[7][7] = new Rook(Piece.Side.BLACK, new Vector2(7, 7));
 
         for (int i = 0; i < 8; i++) {
-            squares[1][i] = new Pawn(Piece.Side.WHITE, new Vector2(1, i));
-            squares[6][i] = new Pawn(Piece.Side.BLACK, new Vector2(6, i));
+            squares[i][1] = new Pawn(Piece.Side.WHITE, new Vector2(1, i));
+            squares[i][6] = new Pawn(Piece.Side.BLACK, new Vector2(6, i));
         }
     }
 

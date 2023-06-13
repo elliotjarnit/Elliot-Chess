@@ -11,8 +11,13 @@ import dev.elliotjarnit.ElliotEngine.Utils.Vector3;
 import java.io.FileNotFoundException;
 
 public class BoardSquare extends EObject {
+    private Vector2 boardPosition;
+
     public BoardSquare(Vector3 boardOrigin, Vector2 boardPosition) {
         super();
+        System.out.println(boardPosition);
+        this.boardPosition = boardPosition;
+
         Vector3 position = new Vector3(boardOrigin);
 
         Vector2 NormalizedBoardPosition = new Vector2(boardPosition.x / 7, boardPosition.y / 7);
@@ -29,30 +34,37 @@ public class BoardSquare extends EObject {
         try {
             String[] data = FileHandler.loadFile(modelPath);
             EFace[] faces = ObjHandler.loadData(data);
-            for (EFace face : faces) {
-                // Alternate between black and white
-                if (boardPosition.x % 2 == 0) {
-                    if (boardPosition.y % 2 == 0) {
-                        face.setColor(Color.WHITE);
-                    } else {
-                        face.setColor(Color.BLACK);
-                    }
-                } else {
-                    if (boardPosition.y % 2 == 0) {
-                        face.setColor(Color.BLACK);
-                    } else {
-                        face.setColor(Color.WHITE);
-                    }
-                }
-            }
             this.setFaces(faces);
         } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {
             e.printStackTrace();
         }
+
+        this.setDefaultColor();
     }
 
     @Override
     public void update() {
 
+    }
+
+    public Vector2 getBoardPosition() {
+        return boardPosition;
+    }
+
+    public void setDefaultColor() {
+        // Alternate between black and white
+        if (boardPosition.x % 2 == 0) {
+            if (boardPosition.y % 2 == 0) {
+                this.setColor(Color.WHITE);
+            } else {
+                this.setColor(Color.BLACK);
+            }
+        } else {
+            if (boardPosition.y % 2 == 0) {
+                this.setColor(Color.BLACK);
+            } else {
+                this.setColor(Color.WHITE);
+            }
+        }
     }
 }
