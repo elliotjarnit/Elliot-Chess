@@ -3,6 +3,7 @@ package dev.elliotjarnit.ElliotChess;
 import dev.elliotjarnit.ElliotEngine.ElliotEngine;
 import dev.elliotjarnit.ElliotEngine.Graphics.Color;
 import dev.elliotjarnit.ElliotEngine.Objects.ECamera;
+import dev.elliotjarnit.ElliotEngine.Objects.EObject;
 import dev.elliotjarnit.ElliotEngine.Objects.EScene;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector3;
@@ -86,6 +87,19 @@ public class Main extends ElliotEngine {
             Vector2 mouseDelta = this.inputManager.getMouseDelta();
 
             camera.setRotationDegrees(camera.getRotationDegrees().add(new Vector2(mouseDelta.y * 0.3, mouseDelta.x * 0.3)));
+
+
+        }
+
+        Vector2 mousePos = this.inputManager.getMousePos();
+
+        if (this.inputManager.isMouseDown(InputManager.MouseButton.LEFT)) {
+            System.out.println("Looking at: " + this.renderer.getLookingAtObject());
+            EObject object = this.renderer.getLookingAtObject(mousePos);
+
+            if (object.getClass() == BoardSquare.class) {
+                object.setColor(Color.RED);
+            }
         }
     }
 }
