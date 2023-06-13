@@ -29,21 +29,16 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board) {
+        int dx = (int) (endPos.x - startPos.x);
         int dy = (int) Math.abs(endPos.y - startPos.y);
-        int dx = (int) Math.abs(endPos.x - startPos.x);
         if (this.getSide() == Side.WHITE) {
-            if (dy == 1 && dx == 0 && board.getPiece((int) endPos.x, (int) endPos.y) == null) {
-                return true;
-            } else if (dy == 1 && dx == 1 && board.getPiece((int) endPos.x, (int) endPos.y) != null) {
-                return true;
-            } else return dy == 2 && dx == 0 && startPos.y == 1;
+            if (dy == 1 && dx == 0 && board.getPiece((int) endPos.x, (int) endPos.y) == null) return true;
+            else if (dy == 1 && dx == 1 && board.getPiece((int) endPos.x, (int) endPos.y) != null) return true;
+            else return dx == 2 && dy == 0 && startPos.y == 1;
         } else {
-            if (dy == -1 && dx == 0 && board.getPiece((int) endPos.x, (int) endPos.y) == null) {
-                return true;
-            }
-            else if (dy == -1 && dx == 1 && board.getPiece((int) endPos.x, (int) endPos.y) != null) {
-                return true;
-            } else return dy == -2 && dx == 0 && startPos.y == 6 && board.getPiece((int) endPos.x, (int) endPos.y) == null;
+            if (dx == -1 && dy == 0 && board.getPiece((int) endPos.x, (int) endPos.y) == null) return true;
+            else if (dx == -1 && dy == 1 && board.getPiece((int) endPos.x, (int) endPos.y) != null) return true;
+            else return dx == -2 && dy == 0 && startPos.y == 6 && board.getPiece((int) endPos.x, (int) endPos.y) == null;
         }
     }
 
