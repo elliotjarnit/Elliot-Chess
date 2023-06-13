@@ -32,13 +32,13 @@ public class Bishop extends Piece {
         int dx = (int) Math.abs(endPos.x - startPos.x);
         int dy = (int) Math.abs(endPos.y - startPos.y);
         if (dy == dx) {
-            int xDirection = Double.compare(endPos.y, startPos.y);
-            int yDirection = Double.compare(endPos.x, startPos.y);
+            int xDirection = Double.compare(startPos.x, endPos.x);
+            int yDirection = Double.compare(startPos.y, endPos.y);
 
-            double currentX = startPos.y + xDirection;
-            double currentY = startPos.x + yDirection;
-            while (currentX != endPos.y || currentY != endPos.x)
-            {
+            double currentX = startPos.x + xDirection;
+            double currentY = startPos.y + yDirection;
+            while (currentX != endPos.x || currentY != endPos.y) {
+                if (currentX < 0 || currentX > 7 || currentY < 0 || currentY > 7) return false; // Out of bounds
                 if (board.getPiece((int) currentX, (int) currentY) != null) return false;
                 currentX += xDirection;
                 currentY += yDirection;

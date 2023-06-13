@@ -13,14 +13,18 @@ import dev.elliotjarnit.ElliotEngine.Utils.Vector3;
 import java.io.FileNotFoundException;
 
 public abstract class Piece extends EEntity {
-    private Side side;
-    private Vector2 boardPosition;
+    private final Side side;
+    private final Vector2 boardPosition;
 
     public Piece(Side side, Vector2 boardPosition) {
         super(new Vector3(0, 0, 0));
         this.side = side;
         this.boardPosition = boardPosition;
 
+        this.calculateWorldPos();
+    }
+
+    public void calculateWorldPos() {
         Vector2 NormalizedBoardPosition = new Vector2(boardPosition.x / 7, boardPosition.y / 7);
 
         NormalizedBoardPosition.x = (NormalizedBoardPosition.x * 2) - 1;
@@ -29,8 +33,6 @@ public abstract class Piece extends EEntity {
         NormalizedBoardPosition.x *= 65;
         NormalizedBoardPosition.y *= 65;
 
-        // Board is 50 x 50 + a tiny border
-        // Board position is 0 - 7
         this.setOrigin(new Vector3(NormalizedBoardPosition.x, 20, NormalizedBoardPosition.y));
     }
 
@@ -41,6 +43,7 @@ public abstract class Piece extends EEntity {
     }
     public void setX(int x) {
         this.boardPosition.x = x;
+        this.calculateWorldPos();
     }
 
     public int getY() {
@@ -48,6 +51,7 @@ public abstract class Piece extends EEntity {
     }
     public void setY(int y) {
         this.boardPosition.y = y;
+        this.calculateWorldPos();
     }
 
     public Side getSide() {

@@ -91,13 +91,16 @@ public class Board extends EObject {
         squares[6][7] = new Knight(Piece.Side.BLACK, new Vector2(7, 6));
         squares[7][7] = new Rook(Piece.Side.BLACK, new Vector2(7, 7));
 
-        for (int i = 0; i < 8; i++) {
-            squares[i][1] = new Pawn(Piece.Side.WHITE, new Vector2(1, i));
-            squares[i][6] = new Pawn(Piece.Side.BLACK, new Vector2(6, i));
-        }
+//        for (int i = 0; i < 8; i++) {
+//            squares[i][1] = new Pawn(Piece.Side.WHITE, new Vector2(1, i));
+//            squares[i][6] = new Pawn(Piece.Side.BLACK, new Vector2(6, i));
+//        }
     }
 
     public Piece getPiece(int x, int y) {
+        if (x < 0 || x > 7 || y < 0 || y > 7) {
+            return null;
+        }
         return squares[y][x];
     }
 

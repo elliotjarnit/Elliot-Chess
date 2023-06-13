@@ -47,7 +47,6 @@ public class Main extends ElliotEngine {
             mainScene.addObject(square);
         }
         for (Piece piece : gameBoard.getPieces()) {
-            System.out.println(piece);
             mainScene.addObject(piece);
         }
         mainScene.setCamera(camera);
@@ -100,17 +99,19 @@ public class Main extends ElliotEngine {
 
             if (object instanceof Piece) {
                 selectedPiece = (Piece) object;
-                System.out.println("Selected piece: " + selectedPiece);
                 setAvailableMoves();
+            } else if (object instanceof BoardSquare) {
+                if (selectedPiece != null) {
+                    BoardSquare square = (BoardSquare) object;
+                    try {
+                        gameBoard.movePiece(new Vector2(selectedPiece.getX(), selectedPiece.getY()), new Vector2(square.getBoardPosition().x, square.getBoardPosition().y));
+                        selectedPiece = null;
+                        setAvailableMoves();
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
             }
-//            else if (object instanceof BoardSquare) {
-//                if (selectedPiece != null) {
-//                    BoardSquare square = (BoardSquare) object;
-//                    System.out.println("Selected square: " + square);
-//                    selectedPiece.moveTo(square);
-//                    selectedPiece = null;
-//                }
-//            }
         }
     }
 
@@ -120,9 +121,14 @@ public class Main extends ElliotEngine {
         }
 
         BoardSquare[] squares = gameBoard.getBoardSquares();
+        if (selectedPiece == null) return;
         for (BoardSquare square : squares) {
-            if (selectedPiece.isValidMove(new Vector2(selectedPiece.getX(), selectedPiece.getY()), new Vector2(square.getBoardPosition().x, square.getBoardPosition().y), gameBoard)) {
-                square.setColor(Color.RED);
+            try {
+                if (selectedPiece.isValidMove(new Vector2(selectedPiece.getX(), selectedPiece.getY()), new Vector2(square.getBoardPosition().x, square.getBoardPosition().y), gameBoard)) {
+                    square.setColor(Color.RED);
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
     }
