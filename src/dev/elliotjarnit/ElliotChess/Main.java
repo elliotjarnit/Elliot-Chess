@@ -94,8 +94,9 @@ public class Main extends ElliotEngine {
         Vector2 mousePos = this.inputManager.getMousePos();
 
         if (this.inputManager.isMouseDown(InputManager.MouseButton.LEFT)) {
-            System.out.println("Looking at: " + this.renderer.getLookingAtObject());
             EObject object = this.renderer.getLookingAtObject(mousePos);
+
+            System.out.println(object);
 
             if (object.getClass() == BoardSquare.class) {
                 object.setColor(Color.RED);
