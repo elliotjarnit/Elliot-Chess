@@ -113,6 +113,10 @@ public class Board extends EObject {
             squares[(int) endPos.y][(int) endPos.x] = piece;
             piece.setX((int) endPos.x);
             piece.setY((int) endPos.y);
+
+            if (capturedPiece != null) {
+                capturedPiece.delete();
+            }
         } else {
             throw new InvalidMoveException("Invalid move");
         }
