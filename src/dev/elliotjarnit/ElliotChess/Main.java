@@ -1,6 +1,7 @@
 package dev.elliotjarnit.ElliotChess;
 
 import dev.elliotjarnit.ElliotEngine.ElliotEngine;
+import dev.elliotjarnit.ElliotEngine.Graphics.Color;
 import dev.elliotjarnit.ElliotEngine.Objects.ECamera;
 import dev.elliotjarnit.ElliotEngine.Objects.EScene;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
@@ -8,7 +9,7 @@ import dev.elliotjarnit.ElliotEngine.Utils.Vector3;
 import dev.elliotjarnit.ElliotEngine.Window.InputManager;
 
 public class Main extends ElliotEngine {
-    private boolean freeMove = false;
+    private boolean freeMove = true;
     private ECamera camera;
 
     public static void main(String[] args) {
@@ -32,11 +33,18 @@ public class Main extends ElliotEngine {
         this.inputManager.takeoverMouse();
 
         EScene mainScene = new EScene();
-        camera = new ECamera(new Vector3(-88, 65, -52));
-        camera.setRotationDegrees(new Vector2(-34.2, 62.5));
+        mainScene.setSkyColor(Color.LIGHT_BLUE);
+//        camera = new ECamera(new Vector3(-88, 65, -52));
+//        camera.setRotationDegrees(new Vector2(-34.2, 62.5));
+        camera = new ECamera(new Vector3(9.1, 216, 25.5));
+        camera.setRotationDegrees(new Vector2(-90, 0));
         Board gameBoard = new Board();
         mainScene.addObject(gameBoard);
+        for (BoardSquare square : gameBoard.getBoardSquares()) {
+            mainScene.addObject(square);
+        }
         for (Piece piece : gameBoard.getPieces()) {
+            System.out.println(piece);
             mainScene.addObject(piece);
         }
         mainScene.setCamera(camera);

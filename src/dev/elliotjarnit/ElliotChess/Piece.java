@@ -1,5 +1,7 @@
 package dev.elliotjarnit.ElliotChess;
 
+import dev.elliotjarnit.ElliotChess.Pieces.Bishop;
+import dev.elliotjarnit.ElliotChess.Pieces.Knight;
 import dev.elliotjarnit.ElliotEngine.Graphics.Color;
 import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
 import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;
@@ -15,21 +17,21 @@ public abstract class Piece extends EEntity {
     private Vector2 boardPosition;
 
     public Piece(Side side, Vector2 boardPosition) {
-        super(new Vector3(0, 10, 0));
+        super(new Vector3(0, 0, 0));
         this.side = side;
         this.boardPosition = boardPosition;
 
-        String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/Piece.obj";
-        try {
-            String[] data = FileHandler.loadFile(modelPath);
-            EFace[] faces = ObjHandler.loadData(data);
-            for (EFace face : faces) {
-                face.setColor(side == Side.WHITE ? Color.WHITE : Color.BLACK);
-            }
-            this.setFaces(faces);
-        } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {
-            e.printStackTrace();
-        }
+        Vector2 NormalizedBoardPosition = new Vector2(boardPosition.x / 7, boardPosition.y / 7);
+
+        NormalizedBoardPosition.x = (NormalizedBoardPosition.x * 2) - 1;
+        NormalizedBoardPosition.y = (NormalizedBoardPosition.y * 2) - 1;
+
+        NormalizedBoardPosition.x *= 65;
+        NormalizedBoardPosition.y *= 65;
+
+        // Board is 50 x 50 + a tiny border
+        // Board position is 0 - 7
+        this.setOrigin(new Vector3(NormalizedBoardPosition.x, 20, NormalizedBoardPosition.y));
     }
 
     public abstract boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board);

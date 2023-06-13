@@ -18,15 +18,17 @@ import java.util.Arrays;
 
 public class Board extends EObject {
     private final Piece[][] squares;
+    private final BoardSquare[] boardSquares;
 
     public Board() {
         squares = new Piece[8][8];
+        boardSquares = new BoardSquare[64];
         String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/GameBoard.obj";
         try {
             String[] data = FileHandler.loadFile(modelPath);
             EFace[] faces = ObjHandler.loadData(data);
             for (EFace face : faces) {
-                face.setColor(new Color(204, 204, 204));
+                face.setColor(new Color(164,116,73));
             }
             this.setFaces(faces);
         } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {
@@ -62,7 +64,15 @@ public class Board extends EObject {
         return pieces;
     }
 
+    public BoardSquare[] getBoardSquares() {
+        return boardSquares;
+    }
+
     private void initializeBoard() {
+        for (int i = 0; i < boardSquares.length; i++) {
+            boardSquares[i] = new BoardSquare(this.getOrigin(), new Vector2(i % 8, i / 8));
+        }
+
         squares[0][0] = new Rook(Piece.Side.WHITE, new Vector2(0, 0));
         squares[0][1] = new Knight(Piece.Side.WHITE, new Vector2(0, 1));
         squares[0][2] = new Bishop(Piece.Side.WHITE, new Vector2(0, 2));
