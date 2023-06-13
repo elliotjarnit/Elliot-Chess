@@ -29,7 +29,7 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board) {
-        int dy = (int) (endPos.y - startPos.y);
+        int dy = (int) Math.abs(endPos.y - startPos.y);
         int dx = (int) Math.abs(endPos.x - startPos.x);
         if (this.getSide() == Side.WHITE) {
             if (dy == 1 && dx == 0 && board.getPiece((int) endPos.x, (int) endPos.y) == null) {

@@ -91,10 +91,10 @@ public class Board extends EObject {
         squares[6][7] = new Knight(Piece.Side.BLACK, new Vector2(7, 6));
         squares[7][7] = new Rook(Piece.Side.BLACK, new Vector2(7, 7));
 
-//        for (int i = 0; i < 8; i++) {
-//            squares[i][1] = new Pawn(Piece.Side.WHITE, new Vector2(1, i));
-//            squares[i][6] = new Pawn(Piece.Side.BLACK, new Vector2(6, i));
-//        }
+        for (int i = 0; i < 8; i++) {
+            squares[i][1] = new Pawn(Piece.Side.WHITE, new Vector2(1, i));
+            squares[i][6] = new Pawn(Piece.Side.BLACK, new Vector2(6, i));
+        }
     }
 
     public Piece getPiece(int x, int y) {
@@ -110,6 +110,9 @@ public class Board extends EObject {
         if (piece != null && piece.isValidMove(startPos, endPos, this)) {
             squares[(int) startPos.y][(int) startPos.x] = null;
             capturedPiece = squares[(int) endPos.y][(int) endPos.x];
+            if (capturedPiece != null && capturedPiece.getSide() == piece.getSide()) {
+                throw new InvalidMoveException("Cannot capture your own piece");
+            }
             squares[(int) endPos.y][(int) endPos.x] = piece;
             piece.setX((int) endPos.x);
             piece.setY((int) endPos.y);

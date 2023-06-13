@@ -97,19 +97,25 @@ public class Main extends ElliotEngine {
         if (this.inputManager.isMouseDown(InputManager.MouseButton.LEFT)) {
             EObject object = this.renderer.getLookingAtObject(mousePos.sub(new Vector2(0, 34)));
 
-            if (object instanceof Piece) {
-                selectedPiece = (Piece) object;
-                setAvailableMoves();
-            } else if (object instanceof BoardSquare) {
+            if (object instanceof BoardSquare) {
                 if (selectedPiece != null) {
                     BoardSquare square = (BoardSquare) object;
                     try {
                         gameBoard.movePiece(new Vector2(selectedPiece.getX(), selectedPiece.getY()), new Vector2(square.getBoardPosition().x, square.getBoardPosition().y));
+                        selectedPiece.setColor(selectedPiece.getSide() == Piece.Side.WHITE ? Color.WHITE : Color.BLACK);
                         selectedPiece = null;
                         setAvailableMoves();
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
+                }
+            } else {
+                if (selectedPiece != null) selectedPiece.setColor(selectedPiece.getSide() == Piece.Side.WHITE ? Color.WHITE : Color.BLACK);
+                selectedPiece = null;
+                if (object instanceof Piece) {
+                    selectedPiece = (Piece) object;
+                    selectedPiece.setColor(Color.RED);
+                    setAvailableMoves();
                 }
             }
         }
