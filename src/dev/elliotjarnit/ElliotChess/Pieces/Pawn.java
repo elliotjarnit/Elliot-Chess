@@ -29,16 +29,38 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board) {
-        int dx = (int) (endPos.x - startPos.x);
-        int dy = (int) Math.abs(endPos.y - startPos.y);
+        // DONE
+
+        int dx;
         if (this.getSide() == Side.WHITE) {
-            if (dy == 1 && dx == 0 && board.getPiece((int) endPos.x, (int) endPos.y) == null) return true;
-            else if (dy == 1 && dx == 1 && board.getPiece((int) endPos.x, (int) endPos.y) != null) return true;
-            else return dx == 2 && dy == 0 && startPos.y == 1;
+            dx = (int) (endPos.x - startPos.x);
         } else {
-            if (dx == -1 && dy == 0 && board.getPiece((int) endPos.x, (int) endPos.y) == null) return true;
-            else if (dx == -1 && dy == 1 && board.getPiece((int) endPos.x, (int) endPos.y) != null) return true;
-            else return dx == -2 && dy == 0 && startPos.y == 6 && board.getPiece((int) endPos.x, (int) endPos.y) == null;
+            dx = (int) (startPos.x - endPos.x);
+        }
+        int dy = (int) Math.abs(endPos.y - startPos.y);
+
+        boolean canDoubleMove = false;
+
+        if (this.getSide() == Side.WHITE) {
+            if (startPos.x == 1) {
+                canDoubleMove = true;
+            }
+        } else {
+            if (startPos.x == 6) {
+                canDoubleMove = true;
+            }
+        }
+
+        Piece endPiece = board.getPiece((int) endPos.x, (int) endPos.y);
+
+        if (dy == 0 && dx == 1 && endPiece == null) {
+            return true;
+        } else if (dy == 0 && dx == 2 && canDoubleMove && endPiece == null) {
+            return true;
+        } else if (dy == 1 && dx == 1 && endPiece != null && endPiece.getSide() != this.getSide()) {
+            return true;
+        } else {
+            return false;
         }
     }
 

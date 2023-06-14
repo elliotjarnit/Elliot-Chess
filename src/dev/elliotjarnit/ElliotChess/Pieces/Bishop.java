@@ -29,11 +29,16 @@ public class Bishop extends Piece {
 
     @Override
     public boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board) {
+        // DONE
+
         int dx = (int) Math.abs(endPos.x - startPos.x);
         int dy = (int) Math.abs(endPos.y - startPos.y);
+
+        Piece endPiece = board.getPiece((int) endPos.x, (int) endPos.y);
+
         if (dy == dx) {
-            int xDirection = Double.compare(startPos.x, endPos.x);
-            int yDirection = Double.compare(startPos.y, endPos.y);
+            int xDirection = (int) Math.signum(endPos.x - startPos.x);
+            int yDirection = (int) Math.signum(endPos.y - startPos.y);
 
             double currentX = startPos.x + xDirection;
             double currentY = startPos.y + yDirection;
@@ -43,7 +48,7 @@ public class Bishop extends Piece {
                 currentX += xDirection;
                 currentY += yDirection;
             }
-            return true;
+            return endPiece == null || endPiece.getSide() != this.getSide();
         }
         return false;
     }

@@ -30,8 +30,13 @@ public class Queen extends Piece
 
     @Override
     public boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board) {
+        // DONE
+
         int dx = (int) Math.abs(endPos.x - startPos.x);
         int dy = (int) Math.abs(endPos.y - startPos.y);
+
+        Piece endPiece = board.getPiece((int) endPos.x, (int) endPos.y);
+
         if (startPos.x == endPos.x || startPos.y == endPos.y || dx == dy) {
             int xDirection = Integer.compare((int) endPos.x, (int) startPos.x);
             int yDirection = Integer.compare((int) endPos.y, (int) startPos.y);
@@ -45,7 +50,7 @@ public class Queen extends Piece
                 currentX += xDirection;
                 currentY += yDirection;
             }
-            return true;
+            return endPiece == null || endPiece.getSide() != this.getSide();
         }
         return false;
     }

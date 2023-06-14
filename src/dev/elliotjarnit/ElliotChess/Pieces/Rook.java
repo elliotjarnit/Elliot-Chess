@@ -30,6 +30,10 @@ public class Rook extends Piece
 
     @Override
     public boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board) {
+        // DONE
+
+        Piece endPiece = board.getPiece((int) endPos.x, (int) endPos.y);
+
         if (startPos.x == endPos.x || startPos.y == endPos.y) {
             int xDirection = Integer.compare((int) endPos.x, (int) startPos.x);
             int yDirection = Integer.compare((int) endPos.y, (int) startPos.y);
@@ -43,7 +47,7 @@ public class Rook extends Piece
                 currentX += xDirection;
                 currentY += yDirection;
             }
-            return true;
+            return endPiece == null || endPiece.getSide() != this.getSide();
         }
         return false;
     }

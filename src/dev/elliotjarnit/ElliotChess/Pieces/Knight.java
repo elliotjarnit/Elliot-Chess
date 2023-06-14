@@ -29,9 +29,23 @@ public class Knight extends Piece {
 
     @Override
     public boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board) {
+        // DONE
+        
         int dy = (int) Math.abs(endPos.y - startPos.y);
         int dx = (int) Math.abs(endPos.x - startPos.x);
-        return (dy == 1 && dx == 2) || (dy == 2 && dx == 1);
+
+        Piece endPiece = board.getPiece((int) endPos.x, (int) endPos.y);
+
+        if (dy == 1 && dx == 2 && endPiece == null) {
+            return true;
+        } else if (dy == 2 && dx == 1 && endPiece == null) {
+            return true;
+        } else if (dy == 1 && dx == 2 && endPiece != null && endPiece.getSide() != this.getSide()) {
+            return true;
+        } else if (dy == 2 && dx == 1 && endPiece != null && endPiece.getSide() != this.getSide()) {
+            return true;
+        }
+        return false;
     }
 
     @Override
