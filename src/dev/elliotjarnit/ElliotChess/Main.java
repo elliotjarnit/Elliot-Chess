@@ -14,14 +14,14 @@ import dev.elliotjarnit.ElliotEngine.Utils.Vector3;
 import dev.elliotjarnit.ElliotEngine.Window.InputManager;
 
 public class Main extends ElliotEngine {
-    private boolean freeMove = true;
+    private boolean freeMove = false;
     private EScene mainScene;
     private ECamera currentCamera;
     private ECamera whiteCamera;
     private ECamera blackCamera;
     private Board gameBoard;
     private Piece selectedPiece;
-    private boolean playing = true;
+    private boolean playing = false;
     private EOText title;
     private EOButton playButton;
     private EOverlay gameOverlay;
