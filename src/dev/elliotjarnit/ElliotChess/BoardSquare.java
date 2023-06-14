@@ -28,6 +28,9 @@ public class BoardSquare extends EObject {
         NormalizedBoardPosition.x *= 60;
         NormalizedBoardPosition.y *= 60;
 
+        position.x += NormalizedBoardPosition.x;
+        position.z += NormalizedBoardPosition.y;
+
         this.setOrigin(new Vector3(NormalizedBoardPosition.x, 10, NormalizedBoardPosition.y));
 
         String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/ChessBoardSquare.obj";
