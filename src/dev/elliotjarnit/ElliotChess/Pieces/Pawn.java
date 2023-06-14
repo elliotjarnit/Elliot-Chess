@@ -2,7 +2,7 @@ package dev.elliotjarnit.ElliotChess.Pieces;
 
 import dev.elliotjarnit.ElliotChess.Board;
 import dev.elliotjarnit.ElliotChess.Piece;
-import dev.elliotjarnit.ElliotEngine.Graphics.Color;
+import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
 import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
 import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;
 import dev.elliotjarnit.ElliotEngine.Objects.EFace;
@@ -19,7 +19,7 @@ public class Pawn extends Piece {
             String[] data = FileHandler.loadFile(modelPath);
             EFace[] faces = ObjHandler.loadData(data);
             for (EFace face : faces) {
-                face.setColor(side == Side.WHITE ? Color.WHITE : Color.BLACK);
+                face.setColor(side == Side.WHITE ? EColor.WHITE : EColor.BLACK);
             }
             this.setFaces(faces);
         } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {

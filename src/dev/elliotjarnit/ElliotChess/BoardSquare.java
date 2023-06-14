@@ -1,6 +1,6 @@
 package dev.elliotjarnit.ElliotChess;
 
-import dev.elliotjarnit.ElliotEngine.Graphics.Color;
+import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
 import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
 import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;
 import dev.elliotjarnit.ElliotEngine.Objects.EFace;
@@ -58,15 +58,15 @@ public class BoardSquare extends EObject {
         // Alternate between black and white
         if (boardPosition.x % 2 == 0) {
             if (boardPosition.y % 2 == 0) {
-                this.setColor(Color.WHITE);
+                this.setColor(EColor.WHITE);
             } else {
-                this.setColor(Color.BLACK);
+                this.setColor(EColor.BLACK);
             }
         } else {
             if (boardPosition.y % 2 == 0) {
-                this.setColor(Color.BLACK);
+                this.setColor(EColor.BLACK);
             } else {
-                this.setColor(Color.WHITE);
+                this.setColor(EColor.WHITE);
             }
         }
     }

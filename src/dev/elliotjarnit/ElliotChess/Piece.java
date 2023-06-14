@@ -1,12 +1,6 @@
 package dev.elliotjarnit.ElliotChess;
 
-import dev.elliotjarnit.ElliotChess.Pieces.Bishop;
-import dev.elliotjarnit.ElliotChess.Pieces.Knight;
-import dev.elliotjarnit.ElliotEngine.Graphics.Color;
-import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
-import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;
 import dev.elliotjarnit.ElliotEngine.Objects.EEntity;
-import dev.elliotjarnit.ElliotEngine.Objects.EFace;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector3;
 

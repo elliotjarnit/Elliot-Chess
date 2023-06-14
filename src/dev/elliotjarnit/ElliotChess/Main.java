@@ -1,10 +1,12 @@
 package dev.elliotjarnit.ElliotChess;
 
 import dev.elliotjarnit.ElliotEngine.ElliotEngine;
-import dev.elliotjarnit.ElliotEngine.Graphics.Color;
+import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
 import dev.elliotjarnit.ElliotEngine.Objects.ECamera;
 import dev.elliotjarnit.ElliotEngine.Objects.EObject;
 import dev.elliotjarnit.ElliotEngine.Objects.EScene;
+import dev.elliotjarnit.ElliotEngine.Overlay.EOText;
+import dev.elliotjarnit.ElliotEngine.Overlay.EOverlay;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector3;
 import dev.elliotjarnit.ElliotEngine.Window.InputManager;
@@ -14,6 +16,7 @@ public class Main extends ElliotEngine {
     private ECamera camera;
     private Board gameBoard;
     private Piece selectedPiece;
+    private boolean playing = false;
 
     public static void main(String[] args) {
         Main engine = new Main();
@@ -33,29 +36,42 @@ public class Main extends ElliotEngine {
 
     @Override
     public void setup() {
-        this.inputManager.takeoverMouse();
-
-        EScene mainScene = new EScene();
-        mainScene.setSkyColor(Color.LIGHT_BLUE);
+        if (playing) {
+            EScene mainScene = new EScene();
+            mainScene.setSkyColor(EColor.LIGHT_BLUE);
 //        camera = new ECamera(new Vector3(-88, 65, -52));
 //        camera.setRotationDegrees(new Vector2(-34.2, 62.5));
-        camera = new ECamera(new Vector3(9.1, 216, 25.5));
-        camera.setRotationDegrees(new Vector2(-90, 0));
-        gameBoard = new Board();
-        mainScene.addObject(gameBoard);
-        for (BoardSquare square : gameBoard.getBoardSquares()) {
-            mainScene.addObject(square);
+            camera = new ECamera(new Vector3(9.1, 216, 25.5));
+            camera.setRotationDegrees(new Vector2(-90, 0));
+            gameBoard = new Board();
+            mainScene.addObject(gameBoard);
+            for (BoardSquare square : gameBoard.getBoardSquares()) {
+                mainScene.addObject(square);
+            }
+            for (Piece piece : gameBoard.getPieces()) {
+                mainScene.addObject(piece);
+            }
+            mainScene.setCamera(camera);
+            this.setScene(mainScene);
+        } else {
+            // Main Menu
+            EScene mainMenuScene = new EScene(false);
+            mainMenuScene.setSkyColor(EColor.BLACK);
+            camera = new ECamera(new Vector3(0, 0, 0));
+            mainMenuScene.setCamera(camera);
+            this.setScene(mainMenuScene);
+
+            EOverlay mainMenuOverlay = new EOverlay();
+            Vector2 windowSize = this.windowManager.getWindowSize();
+            EOText title = new EOText("Elliot Chess", new Vector2(windowSize.x / 2, windowSize.y / 2), 100, EColor.WHITE);
+            mainMenuOverlay.addComponent(title);
+            this.setOverlay(mainMenuOverlay);
         }
-        for (Piece piece : gameBoard.getPieces()) {
-            mainScene.addObject(piece);
-        }
-        mainScene.setCamera(camera);
-        this.setScene(mainScene);
     }
 
     @Override
     public void loop() {
-        if (freeMove) {
+        if (freeMove && playing) {
             if (this.inputManager.isKeyDown(InputManager.Key.W)) {
                 camera.moveForward(0.5);
             }
@@ -102,7 +118,7 @@ public class Main extends ElliotEngine {
                     BoardSquare square = (BoardSquare) object;
                     try {
                         gameBoard.movePiece(new Vector2(selectedPiece.getX(), selectedPiece.getY()), new Vector2(square.getBoardPosition().x, square.getBoardPosition().y));
-                        selectedPiece.setColor(selectedPiece.getSide() == Piece.Side.WHITE ? Color.WHITE : Color.BLACK);
+                        selectedPiece.setColor(selectedPiece.getSide() == Piece.Side.WHITE ? EColor.WHITE : EColor.BLACK);
                         selectedPiece = null;
                         setAvailableMoves();
                     } catch (Exception e) {
@@ -110,11 +126,11 @@ public class Main extends ElliotEngine {
                     }
                 }
             } else {
-                if (selectedPiece != null) selectedPiece.setColor(selectedPiece.getSide() == Piece.Side.WHITE ? Color.WHITE : Color.BLACK);
+                if (selectedPiece != null) selectedPiece.setColor(selectedPiece.getSide() == Piece.Side.WHITE ? EColor.WHITE : EColor.BLACK);
                 selectedPiece = null;
                 if (object instanceof Piece) {
                     selectedPiece = (Piece) object;
-                    selectedPiece.setColor(Color.RED);
+                    selectedPiece.setColor(EColor.RED);
                     setAvailableMoves();
                 }
             }
@@ -131,7 +147,7 @@ public class Main extends ElliotEngine {
         for (BoardSquare square : squares) {
             try {
                 if (selectedPiece.isValidMove(new Vector2(selectedPiece.getX(), selectedPiece.getY()), new Vector2(square.getBoardPosition().x, square.getBoardPosition().y), gameBoard)) {
-                    square.setColor(Color.RED);
+                    square.setColor(EColor.RED);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
