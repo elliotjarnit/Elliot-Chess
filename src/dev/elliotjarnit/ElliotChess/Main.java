@@ -5,6 +5,7 @@ import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
 import dev.elliotjarnit.ElliotEngine.Objects.ECamera;
 import dev.elliotjarnit.ElliotEngine.Objects.EObject;
 import dev.elliotjarnit.ElliotEngine.Objects.EScene;
+import dev.elliotjarnit.ElliotEngine.Overlay.EOButton;
 import dev.elliotjarnit.ElliotEngine.Overlay.EOText;
 import dev.elliotjarnit.ElliotEngine.Overlay.EOverlay;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
@@ -17,6 +18,8 @@ public class Main extends ElliotEngine {
     private Board gameBoard;
     private Piece selectedPiece;
     private boolean playing = false;
+    private EOText title;
+    private EOButton playButton;
 
     public static void main(String[] args) {
         Main engine = new Main();
@@ -37,40 +40,61 @@ public class Main extends ElliotEngine {
     @Override
     public void setup() {
         if (playing) {
-            EScene mainScene = new EScene();
-            mainScene.setSkyColor(EColor.LIGHT_BLUE);
-//        camera = new ECamera(new Vector3(-88, 65, -52));
-//        camera.setRotationDegrees(new Vector2(-34.2, 62.5));
-            camera = new ECamera(new Vector3(9.1, 216, 25.5));
-            camera.setRotationDegrees(new Vector2(-90, 0));
-            gameBoard = new Board();
-            mainScene.addObject(gameBoard);
-            for (BoardSquare square : gameBoard.getBoardSquares()) {
-                mainScene.addObject(square);
-            }
-            for (Piece piece : gameBoard.getPieces()) {
-                mainScene.addObject(piece);
-            }
-            mainScene.setCamera(camera);
-            this.setScene(mainScene);
+            setupGame();
         } else {
             // Main Menu
             EScene mainMenuScene = new EScene(false);
             mainMenuScene.setSkyColor(EColor.BLACK);
+            Skeleton skeleton1 = new Skeleton(new Vector3(6,  -10, 10));
+            Skeleton skeleton2 = new Skeleton(new Vector3(-6,  -10, 10));
             camera = new ECamera(new Vector3(0, 0, 0));
             mainMenuScene.setCamera(camera);
+            mainMenuScene.addObject(skeleton1);
+            mainMenuScene.addObject(skeleton2);
             this.setScene(mainMenuScene);
 
             EOverlay mainMenuOverlay = new EOverlay();
             Vector2 windowSize = this.windowManager.getWindowSize();
-            EOText title = new EOText("Elliot Chess", new Vector2(windowSize.x / 2, windowSize.y / 2), 100, EColor.WHITE);
+            title = new EOText(new Vector2(windowSize.x / 2, windowSize.y / 4), "Elliot Chess", 30, EColor.WHITE);
+            playButton = new EOButton(new Vector2(windowSize.x / 2, windowSize.y / 2 - 15), "Start Game", 20, 20, EColor.WHITE, EColor.BLACK);
+            playButton.addListener(new EOButton.ClickListener() {
+                @Override
+                public void onClick() {
+                    setOverlay(null);
+                    playing = true;
+                    setupGame();
+                }
+            });
             mainMenuOverlay.addComponent(title);
+            mainMenuOverlay.addComponent(playButton);
             this.setOverlay(mainMenuOverlay);
         }
     }
 
+    public void setupGame() {
+        EScene mainScene = new EScene();
+        mainScene.setSkyColor(EColor.LIGHT_BLUE);
+//        camera = new ECamera(new Vector3(-88, 65, -52));
+//        camera.setRotationDegrees(new Vector2(-34.2, 62.5));
+        camera = new ECamera(new Vector3(9.1, 216, 25.5));
+        camera.setRotationDegrees(new Vector2(-90, 0));
+        gameBoard = new Board();
+        mainScene.addObject(gameBoard);
+        for (BoardSquare square : gameBoard.getBoardSquares()) {
+            mainScene.addObject(square);
+        }
+        for (Piece piece : gameBoard.getPieces()) {
+            mainScene.addObject(piece);
+        }
+        mainScene.setCamera(camera);
+        this.setScene(mainScene);
+    }
+
     @Override
     public void loop() {
+        title.setPosition(new Vector2(this.windowManager.getWindowSize().x / 2, this.windowManager.getWindowSize().y / 4));
+        playButton.setPosition(new Vector2(this.windowManager.getWindowSize().x / 2, this.windowManager.getWindowSize().y / 2 - 15));
+
         if (freeMove && playing) {
             if (this.inputManager.isKeyDown(InputManager.Key.W)) {
                 camera.moveForward(0.5);
