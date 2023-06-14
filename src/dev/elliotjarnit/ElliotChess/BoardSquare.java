@@ -15,7 +15,6 @@ public class BoardSquare extends EObject {
 
     public BoardSquare(Vector3 boardOrigin, Vector2 boardPosition) {
         super();
-        System.out.println(boardPosition);
         this.boardPosition = boardPosition;
 
         Vector3 position = new Vector3(boardOrigin);

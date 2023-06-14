@@ -14,7 +14,10 @@ import dev.elliotjarnit.ElliotEngine.Window.InputManager;
 
 public class Main extends ElliotEngine {
     private boolean freeMove = false;
-    private ECamera camera;
+    private EScene mainScene;
+    private ECamera currentCamera;
+    private ECamera whiteCamera;
+    private ECamera blackCamera;
     private Board gameBoard;
     private Piece selectedPiece;
     private boolean playing = false;
@@ -50,7 +53,7 @@ public class Main extends ElliotEngine {
             mainMenuScene.setSkyColor(EColor.BLACK);
             Skeleton skeleton1 = new Skeleton(new Vector3(6,  -10, 10));
             Skeleton skeleton2 = new Skeleton(new Vector3(-6,  -10, 10));
-            camera = new ECamera(new Vector3(0, 0, 0));
+            ECamera camera = new ECamera(new Vector3(0, 0, 0));
             mainMenuScene.setCamera(camera);
             mainMenuScene.addObject(skeleton1);
             mainMenuScene.addObject(skeleton2);
@@ -83,32 +86,41 @@ public class Main extends ElliotEngine {
         gameOverlay.addComponent(turnText);
         this.setOverlay(gameOverlay);
 
-        EScene mainScene = new EScene();
+        mainScene = new EScene();
         mainScene.setSkyColor(EColor.LIGHT_BLUE);
 //        camera = new ECamera(new Vector3(-88, 65, -52));
 //        camera.setRotationDegrees(new Vector2(-34.2, 62.5));
-        camera = new ECamera(new Vector3(123, 102, -65));
-        camera.setRotationDegrees(new Vector2(-41, 304));
         gameBoard = new Board();
         Table table = new Table(new Vector3(0, -0.5, 0));
-        Lamp lamp = new Lamp(new Vector3(0, 0, 150));
-        mainScene.addObject(gameBoard);
+        Lamp lamp = new Lamp(new Vector3(0, 12, 150));
         mainScene.addObject(table);
         mainScene.addObject(lamp);
+        mainScene.addObject(gameBoard);
         for (BoardSquare square : gameBoard.getBoardSquares()) {
             mainScene.addObject(square);
         }
         for (Piece piece : gameBoard.getPieces()) {
             mainScene.addObject(piece);
         }
-        mainScene.setCamera(camera);
+
+        whiteCamera = new ECamera(new Vector3(-151, 124, -1));
+        whiteCamera.setRotationDegrees(new Vector2(-43, 91));
+
+        blackCamera = new ECamera(new Vector3(151, 124, -1));
+        blackCamera.setRotationDegrees(new Vector2(-43, 269));
+
+        currentCamera = blackCamera;
+
+        mainScene.setCamera(currentCamera);
         this.setScene(mainScene);
     }
 
     @Override
     public void loop() {
-        title.setPosition(new Vector2(this.windowManager.getWindowSize().x / 2, this.windowManager.getWindowSize().y / 4));
-        playButton.setPosition(new Vector2(this.windowManager.getWindowSize().x / 2, this.windowManager.getWindowSize().y / 2 - 15));
+        if (title != null) {
+            title.setPosition(new Vector2(this.windowManager.getWindowSize().x / 2, this.windowManager.getWindowSize().y / 4));
+            playButton.setPosition(new Vector2(this.windowManager.getWindowSize().x / 2, this.windowManager.getWindowSize().y / 2 - 15));
+        }
 
         if (turnText != null) {
             if (turn == Piece.Side.WHITE) {
@@ -118,39 +130,49 @@ public class Main extends ElliotEngine {
             }
         }
 
+        if (playing) {
+            if (turn == Piece.Side.WHITE) {
+                currentCamera = whiteCamera;
+                mainScene.setCamera(currentCamera);
+            } else {
+                currentCamera = blackCamera;
+                mainScene.setCamera(currentCamera);
+            }
+        }
+
         if (freeMove && playing) {
             if (this.inputManager.isKeyDown(InputManager.Key.W)) {
-                camera.moveForward(0.5);
+                currentCamera.moveForward(2);
             }
 
             if (this.inputManager.isKeyDown(InputManager.Key.S)) {
-                camera.moveForward(-0.5);
+                currentCamera.moveForward(-2);
             }
             if (this.inputManager.isKeyDown(InputManager.Key.A)) {
-                camera.moveRight(-0.5);
+                currentCamera.moveRight(-2);
             }
 
             if (this.inputManager.isKeyDown(InputManager.Key.D)) {
-                camera.moveRight(0.5);
+                currentCamera.moveRight(2);
             }
 
             if (this.inputManager.isKeyDown(InputManager.Key.SPACE)) {
-                camera.setOrigin(new Vector3(camera.getOrigin().x, camera.getOrigin().y + 0.5, camera.getOrigin().z));
+                currentCamera.setOrigin(new Vector3(currentCamera.getOrigin().x, currentCamera.getOrigin().y + 2, currentCamera.getOrigin().z));
             }
 
             if (this.inputManager.isKeyDown(InputManager.Key.SHIFT)) {
-                camera.setOrigin(new Vector3(camera.getOrigin().x, camera.getOrigin().y - 0.5, camera.getOrigin().z));
+                currentCamera.setOrigin(new Vector3(currentCamera.getOrigin().x, currentCamera.getOrigin().y - 2, currentCamera.getOrigin().z));
             }
 
             if (this.inputManager.isKeyDown(InputManager.Key.P)) {
-                System.out.println("Origin: " + camera.getOrigin());
-                System.out.println("Rotation: " + camera.getRotationDegrees());
+                System.out.println("Origin: " + currentCamera.getOrigin());
+                System.out.println("Rotation: " + currentCamera.getRotationDegrees());
             }
 
             // Mouse movement
             Vector2 mouseDelta = this.inputManager.getMouseDelta();
 
-            camera.setRotationDegrees(camera.getRotationDegrees().add(new Vector2(mouseDelta.y * 0.3, mouseDelta.x * 0.3)));
+            currentCamera.setRotationDegrees(currentCamera.getRotationDegrees().add(new Vector2(mouseDelta.y * 0.3, mouseDelta.x * 0.3)));
 
 
         }
