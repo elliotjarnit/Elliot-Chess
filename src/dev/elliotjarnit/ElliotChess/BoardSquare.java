@@ -55,18 +55,22 @@ public class BoardSquare extends EObject {
     }
 
     public void setDefaultColor() {
+        // Slighty off-white and off-black so that the pieces are more visible
+        EColor white = new EColor(240, 225, 166);
+        EColor black = new EColor(50, 50, 50);
+
         // Alternate between black and white
         if (boardPosition.x % 2 == 0) {
             if (boardPosition.y % 2 == 0) {
-                this.setColor(EColor.WHITE);
+                this.setColor(white);
             } else {
-                this.setColor(EColor.BLACK);
+                this.setColor(black);
             }
         } else {
             if (boardPosition.y % 2 == 0) {
-                this.setColor(EColor.BLACK);
+                this.setColor(black);
             } else {
-                this.setColor(EColor.WHITE);
+                this.setColor(white);
             }
         }
     }

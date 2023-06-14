@@ -13,13 +13,16 @@ import dev.elliotjarnit.ElliotEngine.Utils.Vector3;
 import dev.elliotjarnit.ElliotEngine.Window.InputManager;
 
 public class Main extends ElliotEngine {
-    private boolean freeMove = true;
+    private boolean freeMove = false;
     private ECamera camera;
     private Board gameBoard;
     private Piece selectedPiece;
     private boolean playing = false;
     private EOText title;
     private EOButton playButton;
+    private EOverlay gameOverlay;
+    private EOText turnText;
+    private Piece.Side turn = Piece.Side.WHITE;
 
     public static void main(String[] args) {
         Main engine = new Main();
@@ -72,14 +75,26 @@ public class Main extends ElliotEngine {
     }
 
     public void setupGame() {
+        if (freeMove) this.inputManager.takeoverMouse();
+
+        gameOverlay = new EOverlay();
+        Vector2 windowSize = this.windowManager.getWindowSize();
+        turnText = new EOText(new Vector2(windowSize.x / 2, 50), "White's Turn", 20, EColor.WHITE, EColor.BLACK);
+        gameOverlay.addComponent(turnText);
+        this.setOverlay(gameOverlay);
+
         EScene mainScene = new EScene();
         mainScene.setSkyColor(EColor.LIGHT_BLUE);
 //        camera = new ECamera(new Vector3(-88, 65, -52));
 //        camera.setRotationDegrees(new Vector2(-34.2, 62.5));
-        camera = new ECamera(new Vector3(9.1, 216, 25.5));
-        camera.setRotationDegrees(new Vector2(-90, 0));
+        camera = new ECamera(new Vector3(123, 102, -65));
+        camera.setRotationDegrees(new Vector2(-41, 304));
         gameBoard = new Board();
+        Table table = new Table(new Vector3(0, -0.5, 0));
+        Lamp lamp = new Lamp(new Vector3(0, 0, 150));
         mainScene.addObject(gameBoard);
+        mainScene.addObject(table);
+        mainScene.addObject(lamp);
         for (BoardSquare square : gameBoard.getBoardSquares()) {
             mainScene.addObject(square);
         }
@@ -94,6 +109,14 @@ public class Main extends ElliotEngine {
     public void loop() {
         title.setPosition(new Vector2(this.windowManager.getWindowSize().x / 2, this.windowManager.getWindowSize().y / 4));
         playButton.setPosition(new Vector2(this.windowManager.getWindowSize().x / 2, this.windowManager.getWindowSize().y / 2 - 15));
+
+        if (turnText != null) {
+            if (turn == Piece.Side.WHITE) {
+                turnText.setText("White's Turn");
+            } else {
+                turnText.setText("Black's Turn");
+            }
+        }
 
         if (freeMove && playing) {
             if (this.inputManager.isKeyDown(InputManager.Key.W)) {
@@ -135,7 +158,7 @@ public class Main extends ElliotEngine {
         Vector2 mousePos = this.inputManager.getMousePos();
 
         if (this.inputManager.isMouseDown(InputManager.MouseButton.LEFT)) {
-            EObject object = this.renderer.getLookingAtObject(mousePos.sub(new Vector2(0, 34)));
+            EObject object = this.renderer.getLookingAtObject(mousePos);
 
             if (object instanceof BoardSquare) {
                 if (selectedPiece != null) {
@@ -144,6 +167,7 @@ public class Main extends ElliotEngine {
                         gameBoard.movePiece(new Vector2(selectedPiece.getX(), selectedPiece.getY()), new Vector2(square.getBoardPosition().x, square.getBoardPosition().y));
                         selectedPiece.setColor(selectedPiece.getSide() == Piece.Side.WHITE ? EColor.WHITE : EColor.BLACK);
                         selectedPiece = null;
+                        turn = turn == Piece.Side.WHITE ? Piece.Side.BLACK : Piece.Side.WHITE;
                         setAvailableMoves();
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -153,6 +177,7 @@ public class Main extends ElliotEngine {
                 if (selectedPiece != null) selectedPiece.setColor(selectedPiece.getSide() == Piece.Side.WHITE ? EColor.WHITE : EColor.BLACK);
                 selectedPiece = null;
                 if (object instanceof Piece) {
+                    if (((Piece) object).getSide() != turn) return;
                     selectedPiece = (Piece) object;
                     selectedPiece.setColor(EColor.RED);
                     setAvailableMoves();

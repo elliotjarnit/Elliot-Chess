@@ -24,8 +24,8 @@ public abstract class Piece extends EEntity {
         NormalizedBoardPosition.x = (NormalizedBoardPosition.x * 2) - 1;
         NormalizedBoardPosition.y = (NormalizedBoardPosition.y * 2) - 1;
 
-        NormalizedBoardPosition.x *= 65;
-        NormalizedBoardPosition.y *= 65;
+        NormalizedBoardPosition.x *= 60;
+        NormalizedBoardPosition.y *= 60;
 
         this.setOrigin(new Vector3(NormalizedBoardPosition.x, 20, NormalizedBoardPosition.y));
     }
