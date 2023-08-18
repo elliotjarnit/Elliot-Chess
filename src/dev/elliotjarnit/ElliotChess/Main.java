@@ -42,6 +42,7 @@ public class Main extends ElliotEngine {
         this.setOption(Options.VERSION, "1.0.0");
         this.setOption(Options.AUTHOR, "Elliot Jarnit, Jeremy Rowell");
         this.setOption(Options.LICENSE, "None");
+//        this.setOption(AdvancedOptions.WIRE_FRAME, "true");
     }
 
     @Override
