@@ -1,11 +1,11 @@
-package dev.elliotjarnit.ElliotChess;
+package main.java.dev.elliotjarnit.ElliotChess;
 
-import dev.elliotjarnit.ElliotChess.Pieces.Rook;
-import dev.elliotjarnit.ElliotChess.Pieces.Knight;
-import dev.elliotjarnit.ElliotChess.Pieces.Bishop;
-import dev.elliotjarnit.ElliotChess.Pieces.Queen;
-import dev.elliotjarnit.ElliotChess.Pieces.King;
-import dev.elliotjarnit.ElliotChess.Pieces.Pawn;
+import main.java.dev.elliotjarnit.ElliotChess.Pieces.Rook;
+import main.java.dev.elliotjarnit.ElliotChess.Pieces.Knight;
+import main.java.dev.elliotjarnit.ElliotChess.Pieces.Bishop;
+import main.java.dev.elliotjarnit.ElliotChess.Pieces.Queen;
+import main.java.dev.elliotjarnit.ElliotChess.Pieces.King;
+import main.java.dev.elliotjarnit.ElliotChess.Pieces.Pawn;
 import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
 import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
 import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;
@@ -14,7 +14,6 @@ import dev.elliotjarnit.ElliotEngine.Objects.EObject;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
 
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 
 public class Board extends EObject {
     private final Piece[][] squares;

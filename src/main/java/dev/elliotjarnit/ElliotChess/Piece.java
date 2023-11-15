@@ -1,10 +1,8 @@
-package dev.elliotjarnit.ElliotChess;
+package main.java.dev.elliotjarnit.ElliotChess;
 
 import dev.elliotjarnit.ElliotEngine.Objects.EEntity;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector3;
-
-import java.io.FileNotFoundException;
 
 public abstract class Piece extends EEntity {
     private final Side side;

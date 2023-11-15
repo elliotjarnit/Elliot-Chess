@@ -1,7 +1,7 @@
-package dev.elliotjarnit.ElliotChess.Pieces;
+package main.java.dev.elliotjarnit.ElliotChess.Pieces;
 
-import dev.elliotjarnit.ElliotChess.Board;
-import dev.elliotjarnit.ElliotChess.Piece;
+import main.java.dev.elliotjarnit.ElliotChess.Board;
+import main.java.dev.elliotjarnit.ElliotChess.Piece;
 import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
 import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
 import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;

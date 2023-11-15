@@ -1,9 +1,8 @@
-package dev.elliotjarnit.ElliotChess;
+package main.java.dev.elliotjarnit.ElliotChess;
 
 import dev.elliotjarnit.ElliotEngine.ElliotEngine;
 import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
 import dev.elliotjarnit.ElliotEngine.Objects.ECamera;
-import dev.elliotjarnit.ElliotEngine.Objects.ECube;
 import dev.elliotjarnit.ElliotEngine.Objects.EObject;
 import dev.elliotjarnit.ElliotEngine.Objects.EScene;
 import dev.elliotjarnit.ElliotEngine.Overlay.EOButton;

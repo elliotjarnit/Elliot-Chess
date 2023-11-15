@@ -1,7 +1,7 @@
-package dev.elliotjarnit.ElliotChess.Pieces;
+package main.java.dev.elliotjarnit.ElliotChess.Pieces;
 
-import dev.elliotjarnit.ElliotChess.Board;
-import dev.elliotjarnit.ElliotChess.Piece;
+import main.java.dev.elliotjarnit.ElliotChess.Board;
+import main.java.dev.elliotjarnit.ElliotChess.Piece;
 import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
 import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
 import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;
@@ -10,12 +10,11 @@ import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
 
 import java.io.FileNotFoundException;
 
-public class Queen extends Piece
-{
-    public Queen(Side side, Vector2 boardPosition) {
+public class Knight extends Piece {
+    public Knight(Side side, Vector2 boardPosition) {
         super(side, boardPosition);
 
-        String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/queen.obj";
+        String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/knight.obj";
         try {
             String[] data = FileHandler.loadFile(modelPath);
             EFace[] faces = ObjHandler.loadData(data);
@@ -31,26 +30,20 @@ public class Queen extends Piece
     @Override
     public boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board) {
         // DONE
-
-        int dx = (int) Math.abs(endPos.x - startPos.x);
+        
         int dy = (int) Math.abs(endPos.y - startPos.y);
+        int dx = (int) Math.abs(endPos.x - startPos.x);
 
         Piece endPiece = board.getPiece((int) endPos.x, (int) endPos.y);
 
-        if (startPos.x == endPos.x || startPos.y == endPos.y || dx == dy) {
-            int xDirection = Integer.compare((int) endPos.x, (int) startPos.x);
-            int yDirection = Integer.compare((int) endPos.y, (int) startPos.y);
-
-            int currentX = (int) (startPos.x + xDirection);
-            int currentY = (int) (startPos.y + yDirection);
-            while (currentX != endPos.x || currentY != endPos.y) {
-                if (board.getPiece(currentX, currentY) != null) {
-                    return false;
-                }
-                currentX += xDirection;
-                currentY += yDirection;
-            }
-            return endPiece == null || endPiece.getSide() != this.getSide();
+        if (dy == 1 && dx == 2 && endPiece == null) {
+            return true;
+        } else if (dy == 2 && dx == 1 && endPiece == null) {
+            return true;
+        } else if (dy == 1 && dx == 2 && endPiece != null && endPiece.getSide() != this.getSide()) {
+            return true;
+        } else if (dy == 2 && dx == 1 && endPiece != null && endPiece.getSide() != this.getSide()) {
+            return true;
         }
         return false;
     }
