@@ -1,11 +1,11 @@
-package main.java.dev.elliotjarnit.ElliotChess;
+package dev.elliotjarnit.ElliotChess;
 
-import main.java.dev.elliotjarnit.ElliotChess.Pieces.Rook;
-import main.java.dev.elliotjarnit.ElliotChess.Pieces.Knight;
-import main.java.dev.elliotjarnit.ElliotChess.Pieces.Bishop;
-import main.java.dev.elliotjarnit.ElliotChess.Pieces.Queen;
-import main.java.dev.elliotjarnit.ElliotChess.Pieces.King;
-import main.java.dev.elliotjarnit.ElliotChess.Pieces.Pawn;
+import dev.elliotjarnit.ElliotChess.Pieces.Rook;
+import dev.elliotjarnit.ElliotChess.Pieces.Knight;
+import dev.elliotjarnit.ElliotChess.Pieces.Bishop;
+import dev.elliotjarnit.ElliotChess.Pieces.Queen;
+import dev.elliotjarnit.ElliotChess.Pieces.King;
+import dev.elliotjarnit.ElliotChess.Pieces.Pawn;
 import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
 import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
 import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;

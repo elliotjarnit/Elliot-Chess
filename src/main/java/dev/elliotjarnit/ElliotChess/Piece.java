@@ -1,5 +1,4 @@
-package main.java.dev.elliotjarnit.ElliotChess;
-
+package dev.elliotjarnit.ElliotChess;
 import dev.elliotjarnit.ElliotEngine.Objects.EEntity;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector3;

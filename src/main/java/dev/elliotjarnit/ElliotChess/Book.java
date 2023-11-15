@@ -1,5 +1,4 @@
-package main.java.dev.elliotjarnit.ElliotChess;
-
+package dev.elliotjarnit.ElliotChess;
 import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
 import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
 import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;
