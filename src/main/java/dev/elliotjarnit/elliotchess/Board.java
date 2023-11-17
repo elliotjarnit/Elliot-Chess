@@ -1,11 +1,12 @@
-package dev.elliotjarnit.ElliotChess;
+package dev.elliotjarnit.elliotchess;
 
-import dev.elliotjarnit.ElliotChess.Pieces.Rook;
-import dev.elliotjarnit.ElliotChess.Pieces.Knight;
-import dev.elliotjarnit.ElliotChess.Pieces.Bishop;
-import dev.elliotjarnit.ElliotChess.Pieces.Queen;
-import dev.elliotjarnit.ElliotChess.Pieces.King;
-import dev.elliotjarnit.ElliotChess.Pieces.Pawn;
+import dev.elliotjarnit.elliotchess.Pieces.Rook;
+import dev.elliotjarnit.elliotchess.Pieces.Knight;
+import dev.elliotjarnit.elliotchess.Pieces.Bishop;
+import dev.elliotjarnit.elliotchess.Pieces.Queen;
+import dev.elliotjarnit.elliotchess.Pieces.King;
+import dev.elliotjarnit.elliotchess.Pieces.Pawn;
+import dev.elliotjarnit.elliotengine.Exceptions.NotTriangleException;
 import dev.elliotjarnit.elliotengine.Graphics.EColor;
 import dev.elliotjarnit.elliotengine.Handlers.FileHandler;
 import dev.elliotjarnit.elliotengine.Handlers.ObjHandler;
@@ -30,7 +31,7 @@ public class Board extends EObject {
                 face.setColor(new EColor(164,116,73));
             }
             this.setFaces(faces);
-        } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {
+        } catch (FileNotFoundException | NotTriangleException e) {
             e.printStackTrace();
         }
         initializeBoard();

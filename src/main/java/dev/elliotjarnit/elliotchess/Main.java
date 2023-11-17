@@ -1,4 +1,4 @@
-package dev.elliotjarnit.ElliotChess;
+package dev.elliotjarnit.elliotchess;
 
 import dev.elliotjarnit.elliotengine.ElliotEngine;
 import dev.elliotjarnit.elliotengine.Graphics.EColor;
@@ -28,6 +28,7 @@ public class Main extends ElliotEngine {
     private Piece.Side turn = Piece.Side.WHITE;
 
     public static void main(String[] args) {
+        System.out.println("TEST");
         Main engine = new Main();
         engine.run();
     }
@@ -181,7 +182,8 @@ public class Main extends ElliotEngine {
         Vector2 mousePos = this.inputManager.getMousePos();
 
         if (this.inputManager.isMouseDown(InputManager.MouseButton.LEFT)) {
-            EObject object = this.renderer.getLookingAtObject(mousePos);
+//            EObject object = this.renderer.getLookingAtObject(mousePos);
+            EObject object = null;
 
             if (object instanceof BoardSquare) {
                 if (selectedPiece != null) {

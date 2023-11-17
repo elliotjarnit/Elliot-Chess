@@ -1,7 +1,8 @@
-package dev.elliotjarnit.ElliotChess.Pieces;
+package dev.elliotjarnit.elliotchess.Pieces;
 
-import dev.elliotjarnit.ElliotChess.Board;
-import dev.elliotjarnit.ElliotChess.Piece;
+import dev.elliotjarnit.elliotchess.Board;
+import dev.elliotjarnit.elliotchess.Piece;
+import dev.elliotjarnit.elliotengine.Exceptions.NotTriangleException;
 import dev.elliotjarnit.elliotengine.Graphics.EColor;
 import dev.elliotjarnit.elliotengine.Handlers.FileHandler;
 import dev.elliotjarnit.elliotengine.Handlers.ObjHandler;
@@ -22,7 +23,7 @@ public class Bishop extends Piece {
                 face.setColor(side == Side.WHITE ? EColor.WHITE : EColor.BLACK);
             }
             this.setFaces(faces);
-        } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {
+        } catch (FileNotFoundException | NotTriangleException e) {
             e.printStackTrace();
         }
     }

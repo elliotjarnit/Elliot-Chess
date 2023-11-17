@@ -1,4 +1,5 @@
-package dev.elliotjarnit.ElliotChess;
+package dev.elliotjarnit.elliotchess;
+import dev.elliotjarnit.elliotengine.Exceptions.NotTriangleException;
 import dev.elliotjarnit.elliotengine.Graphics.EColor;
 import dev.elliotjarnit.elliotengine.Handlers.FileHandler;
 import dev.elliotjarnit.elliotengine.Handlers.ObjHandler;
@@ -18,7 +19,7 @@ public class Lamp extends EObject {
             EFace[] faces = ObjHandler.loadData(data);
             this.setFaces(faces);
             this.setColor(new EColor(232, 219, 179));
-        } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {
+        } catch (FileNotFoundException | NotTriangleException e) {
             e.printStackTrace();
         }
     }

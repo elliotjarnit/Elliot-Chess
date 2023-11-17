@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'application'
     id 'idea'
 }
 
@@ -23,6 +23,10 @@ repositories {
             password = GH_TOKEN
         }
     }
+}
+
+application {
+    mainClass = 'dev.elliotjarnit.elliotchess.Main'
 }
 
 dependencies {

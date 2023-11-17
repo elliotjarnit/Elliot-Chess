@@ -1,4 +1,5 @@
-package dev.elliotjarnit.ElliotChess;
+package dev.elliotjarnit.elliotchess;
+import dev.elliotjarnit.elliotengine.Exceptions.NotTriangleException;
 import dev.elliotjarnit.elliotengine.Graphics.EColor;
 import dev.elliotjarnit.elliotengine.Handlers.FileHandler;
 import dev.elliotjarnit.elliotengine.Handlers.ObjHandler;
@@ -36,7 +37,7 @@ public class BoardSquare extends EObject {
             String[] data = FileHandler.loadFile(modelPath);
             EFace[] faces = ObjHandler.loadData(data);
             this.setFaces(faces);
-        } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {
+        } catch (FileNotFoundException | NotTriangleException e) {
             e.printStackTrace();
         }
 

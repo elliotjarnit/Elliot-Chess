@@ -1,4 +1,4 @@
-package dev.elliotjarnit.ElliotChess;
+package dev.elliotjarnit.elliotchess;
 import dev.elliotjarnit.elliotengine.Objects.EEntity;
 import dev.elliotjarnit.elliotengine.Utils.Vector2;
 import dev.elliotjarnit.elliotengine.Utils.Vector3;

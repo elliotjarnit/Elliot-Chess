@@ -1,7 +1,8 @@
-package dev.elliotjarnit.ElliotChess.Pieces;
+package dev.elliotjarnit.elliotchess.Pieces;
 
-import dev.elliotjarnit.ElliotChess.Board;
-import dev.elliotjarnit.ElliotChess.Piece;
+import dev.elliotjarnit.elliotchess.Board;
+import dev.elliotjarnit.elliotchess.Piece;
+import dev.elliotjarnit.elliotengine.Exceptions.NotTriangleException;
 import dev.elliotjarnit.elliotengine.Graphics.EColor;
 import dev.elliotjarnit.elliotengine.Handlers.FileHandler;
 import dev.elliotjarnit.elliotengine.Handlers.ObjHandler;
@@ -10,12 +11,12 @@ import dev.elliotjarnit.elliotengine.Utils.Vector2;
 
 import java.io.FileNotFoundException;
 
-public class Queen extends Piece
+public class Rook extends Piece
 {
-    public Queen(Side side, Vector2 boardPosition) {
+    public Rook(Side side, Vector2 boardPosition) {
         super(side, boardPosition);
 
-        String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/queen.obj";
+        String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/rook.obj";
         try {
             String[] data = FileHandler.loadFile(modelPath);
             EFace[] faces = ObjHandler.loadData(data);
@@ -23,7 +24,7 @@ public class Queen extends Piece
                 face.setColor(side == Side.WHITE ? EColor.WHITE : EColor.BLACK);
             }
             this.setFaces(faces);
-        } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {
+        } catch (FileNotFoundException | NotTriangleException e) {
             e.printStackTrace();
         }
     }
@@ -32,12 +33,9 @@ public class Queen extends Piece
     public boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board) {
         // DONE
 
-        int dx = (int) Math.abs(endPos.x - startPos.x);
-        int dy = (int) Math.abs(endPos.y - startPos.y);
-
         Piece endPiece = board.getPiece((int) endPos.x, (int) endPos.y);
 
-        if (startPos.x == endPos.x || startPos.y == endPos.y || dx == dy) {
+        if (startPos.x == endPos.x || startPos.y == endPos.y) {
             int xDirection = Integer.compare((int) endPos.x, (int) startPos.x);
             int yDirection = Integer.compare((int) endPos.y, (int) startPos.y);
 

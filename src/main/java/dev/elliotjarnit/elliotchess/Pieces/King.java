@@ -1,12 +1,13 @@
-package dev.elliotjarnit.ElliotChess.Pieces;
+package dev.elliotjarnit.elliotchess.Pieces;
 
-import dev.elliotjarnit.ElliotChess.Board;
-import dev.elliotjarnit.ElliotChess.Piece;
-import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
-import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
-import dev.elliotjarnit.ElliotEngine.Handlers.elliotenginebjHandler;
-import dev.elliotjarnit.ElliotEngine.elliotenginebjects.EFace;
-import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
+import dev.elliotjarnit.elliotchess.Board;
+import dev.elliotjarnit.elliotchess.Piece;
+import dev.elliotjarnit.elliotengine.Graphics.EColor;
+import dev.elliotjarnit.elliotengine.Handlers.FileHandler;
+import dev.elliotjarnit.elliotengine.Handlers.ObjHandler;
+import dev.elliotjarnit.elliotengine.Objects.EFace;
+import dev.elliotjarnit.elliotengine.Utils.Vector2;
+import dev.elliotjarnit.elliotengine.Exceptions.NotTriangleException;
 
 import java.io.FileNotFoundException;
 
@@ -18,19 +19,19 @@ public class King extends Piece
         String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/king.obj";
         try {
             String[] data = FileHandler.loadFile(modelPath);
-            EFace[] faces = elliotenginebjHandler.loadData(data);
+            EFace[] faces = ObjHandler.loadData(data);
             for (EFace face : faces) {
                 face.setColor(side == Side.WHITE ? EColor.WHITE : EColor.BLACK);
             }
             this.setFaces(faces);
-        } catch (FileNotFoundException | elliotenginebjHandler.NotTriangleException e) {
+        } catch (FileNotFoundException | NotTriangleException e) {
             e.printStackTrace();
         }
     }
 
-    @elliotengineverride
+    @Override
     public boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board) {
-        // DelliotengineNE
+        // DONE
 
         int dy = (int) Math.abs(endPos.y - startPos.y);
         int dx = (int) Math.abs(endPos.x - startPos.x);
@@ -38,7 +39,7 @@ public class King extends Piece
         return dy <= 1 && dx <= 1 && (endPiece == null || endPiece.getSide() != this.getSide());
     }
 
-    @elliotengineverride
+    @Override
     public void update() {
 
     }
