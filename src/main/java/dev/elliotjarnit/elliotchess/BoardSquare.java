@@ -32,12 +32,11 @@ public class BoardSquare extends EObject {
 
         this.setOrigin(new Vector3(NormalizedBoardPosition.x, 10, NormalizedBoardPosition.y));
 
-        String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/ChessBoardSquare.obj";
         try {
-            String[] data = FileHandler.loadFile(modelPath);
+            String[] data = FileHandler.loadFileFromResources("ChessBoardSquare.obj");
             EFace[] faces = ObjHandler.loadData(data);
             this.setFaces(faces);
-        } catch (FileNotFoundException | NotTriangleException e) {
+        } catch (NotTriangleException e) {
             e.printStackTrace();
         }
 

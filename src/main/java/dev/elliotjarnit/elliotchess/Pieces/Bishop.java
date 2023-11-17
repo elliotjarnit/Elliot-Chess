@@ -15,15 +15,14 @@ public class Bishop extends Piece {
     public Bishop(Side side, Vector2 boardPosition) {
         super(side, boardPosition);
 
-        String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/bishop.obj";
         try {
-            String[] data = FileHandler.loadFile(modelPath);
+            String[] data = FileHandler.loadFileFromResources("Bishop.obj");
             EFace[] faces = ObjHandler.loadData(data);
             for (EFace face : faces) {
                 face.setColor(side == Side.WHITE ? EColor.WHITE : EColor.BLACK);
             }
             this.setFaces(faces);
-        } catch (FileNotFoundException | NotTriangleException e) {
+        } catch (NotTriangleException e) {
             e.printStackTrace();
         }
     }

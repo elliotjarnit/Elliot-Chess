@@ -14,13 +14,12 @@ public class Skeleton extends EObject {
     public Skeleton(Vector3 origin) {
         super(origin);
 
-        String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/Skeleton.obj";
         try {
-            String[] data = FileHandler.loadFile(modelPath);
+            String[] data = FileHandler.loadFileFromResources("Skeleton.obj");
             EFace[] faces = ObjHandler.loadData(data);
             this.setFaces(faces);
             this.setColor(new EColor(240, 225, 166));
-        } catch (FileNotFoundException | NotTriangleException e) {
+        } catch (NotTriangleException e) {
             e.printStackTrace();
         }
     }

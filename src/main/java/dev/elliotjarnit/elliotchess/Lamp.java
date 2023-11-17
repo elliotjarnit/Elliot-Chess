@@ -13,13 +13,12 @@ public class Lamp extends EObject {
     public Lamp(Vector3 origin) {
         super(origin);
 
-        String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/Lamp.obj";
         try {
-            String[] data = FileHandler.loadFile(modelPath);
+            String[] data = FileHandler.loadFileFromResources("Lamp.obj");
             EFace[] faces = ObjHandler.loadData(data);
             this.setFaces(faces);
             this.setColor(new EColor(232, 219, 179));
-        } catch (FileNotFoundException | NotTriangleException e) {
+        } catch (NotTriangleException e) {
             e.printStackTrace();
         }
     }

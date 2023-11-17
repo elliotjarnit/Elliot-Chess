@@ -13,13 +13,12 @@ public class Book extends EObject {
     public Book(Vector3 origin) {
         super(origin);
 
-        String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/Books.obj";
         try {
-            String[] data = FileHandler.loadFile(modelPath);
+            String[] data = FileHandler.loadFileFromResources("Book.obj");
             EFace[] faces = ObjHandler.loadData(data);
             this.setFaces(faces);
             this.setColor(new EColor(255,255,242));
-        } catch (FileNotFoundException | NotTriangleException e) {
+        } catch (NotTriangleException e) {
             e.printStackTrace();
         }
     }

@@ -23,15 +23,14 @@ public class Board extends EObject {
     public Board() {
         squares = new Piece[8][8];
         boardSquares = new BoardSquare[64];
-        String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/GameBoard.obj";
         try {
-            String[] data = FileHandler.loadFile(modelPath);
+            String[] data = FileHandler.loadFileFromResources("GameBoard.obj");
             EFace[] faces = ObjHandler.loadData(data);
             for (EFace face : faces) {
                 face.setColor(new EColor(164,116,73));
             }
             this.setFaces(faces);
-        } catch (FileNotFoundException | NotTriangleException e) {
+        } catch (NotTriangleException e) {
             e.printStackTrace();
         }
         initializeBoard();
