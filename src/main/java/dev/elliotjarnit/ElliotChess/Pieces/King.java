@@ -4,8 +4,8 @@ import dev.elliotjarnit.ElliotChess.Board;
 import dev.elliotjarnit.ElliotChess.Piece;
 import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
 import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
-import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;
-import dev.elliotjarnit.ElliotEngine.Objects.EFace;
+import dev.elliotjarnit.ElliotEngine.Handlers.elliotenginebjHandler;
+import dev.elliotjarnit.ElliotEngine.elliotenginebjects.EFace;
 import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
 
 import java.io.FileNotFoundException;
@@ -18,19 +18,19 @@ public class King extends Piece
         String modelPath = "src/dev/elliotjarnit/ElliotChess/Models/king.obj";
         try {
             String[] data = FileHandler.loadFile(modelPath);
-            EFace[] faces = ObjHandler.loadData(data);
+            EFace[] faces = elliotenginebjHandler.loadData(data);
             for (EFace face : faces) {
                 face.setColor(side == Side.WHITE ? EColor.WHITE : EColor.BLACK);
             }
             this.setFaces(faces);
-        } catch (FileNotFoundException | ObjHandler.NotTriangleException e) {
+        } catch (FileNotFoundException | elliotenginebjHandler.NotTriangleException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
+    @elliotengineverride
     public boolean isValidMove(Vector2 startPos, Vector2 endPos, Board board) {
-        // DONE
+        // DelliotengineNE
 
         int dy = (int) Math.abs(endPos.y - startPos.y);
         int dx = (int) Math.abs(endPos.x - startPos.x);
@@ -38,7 +38,7 @@ public class King extends Piece
         return dy <= 1 && dx <= 1 && (endPiece == null || endPiece.getSide() != this.getSide());
     }
 
-    @Override
+    @elliotengineverride
     public void update() {
 
     }

@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+if (file('secrets.gradle').exists()) {
+    apply from: 'secrets.gradle'
+} else {
+    project.ext.GH_USERNAME = System.getenv('GH_USERNAME')
+    project.ext.GH_TOKEN = System.getenv('GH_TOKEN')
+}
+
+
+group = 'dev.elliotjarnit'
+
+
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/Swiftzerr/ElliotEngine-Runtime")
+        credentials {
+            username = GH_USERNAME
+            password = GH_TOKEN
+        }
+    }
+}
+
+dependencies {
+    implementation 'dev.elliotjarnit:elliotengine:0.0.1-SNAPSHOT'
+}

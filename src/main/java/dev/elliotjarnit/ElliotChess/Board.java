@@ -6,12 +6,12 @@ import dev.elliotjarnit.ElliotChess.Pieces.Bishop;
 import dev.elliotjarnit.ElliotChess.Pieces.Queen;
 import dev.elliotjarnit.ElliotChess.Pieces.King;
 import dev.elliotjarnit.ElliotChess.Pieces.Pawn;
-import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
-import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
-import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;
-import dev.elliotjarnit.ElliotEngine.Objects.EFace;
-import dev.elliotjarnit.ElliotEngine.Objects.EObject;
-import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
+import dev.elliotjarnit.elliotengine.Graphics.EColor;
+import dev.elliotjarnit.elliotengine.Handlers.FileHandler;
+import dev.elliotjarnit.elliotengine.Handlers.ObjHandler;
+import dev.elliotjarnit.elliotengine.Objects.EFace;
+import dev.elliotjarnit.elliotengine.Objects.EObject;
+import dev.elliotjarnit.elliotengine.Utils.Vector2;
 
 import java.io.FileNotFoundException;
 

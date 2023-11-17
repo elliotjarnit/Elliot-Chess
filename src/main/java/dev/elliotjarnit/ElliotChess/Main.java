@@ -1,16 +1,16 @@
 package dev.elliotjarnit.ElliotChess;
 
-import dev.elliotjarnit.ElliotEngine.ElliotEngine;
-import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
-import dev.elliotjarnit.ElliotEngine.Objects.ECamera;
-import dev.elliotjarnit.ElliotEngine.Objects.EObject;
-import dev.elliotjarnit.ElliotEngine.Objects.EScene;
-import dev.elliotjarnit.ElliotEngine.Overlay.EOButton;
-import dev.elliotjarnit.ElliotEngine.Overlay.EOText;
-import dev.elliotjarnit.ElliotEngine.Overlay.EOverlay;
-import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
-import dev.elliotjarnit.ElliotEngine.Utils.Vector3;
-import dev.elliotjarnit.ElliotEngine.Window.InputManager;
+import dev.elliotjarnit.elliotengine.ElliotEngine;
+import dev.elliotjarnit.elliotengine.Graphics.EColor;
+import dev.elliotjarnit.elliotengine.Objects.ECamera;
+import dev.elliotjarnit.elliotengine.Objects.EObject;
+import dev.elliotjarnit.elliotengine.Objects.EScene;
+import dev.elliotjarnit.elliotengine.Overlay.EOButton;
+import dev.elliotjarnit.elliotengine.Overlay.EOText;
+import dev.elliotjarnit.elliotengine.Overlay.EOverlay;
+import dev.elliotjarnit.elliotengine.Utils.Vector2;
+import dev.elliotjarnit.elliotengine.Utils.Vector3;
+import dev.elliotjarnit.elliotengine.Window.InputManager;
 
 public class Main extends ElliotEngine {
     private boolean freeMove = false;
@@ -37,7 +37,7 @@ public class Main extends ElliotEngine {
         this.setOption(Options.NAME, "Elliot Chess");
         this.setOption(Options.WINDOW_WIDTH, "800");
         this.setOption(Options.WINDOW_HEIGHT, "800");
-        this.setOption(Options.DESCRIPTION, "Chess game made with ElliotEngine");
+        this.setOption(Options.DESCRIPTION, "Chess game made with elliotengine");
         this.setOption(Options.VERSION, "1.0.0");
         this.setOption(Options.AUTHOR, "Elliot Jarnit, Jeremy Rowell");
         this.setOption(Options.LICENSE, "None");

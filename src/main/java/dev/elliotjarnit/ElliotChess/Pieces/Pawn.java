@@ -2,11 +2,11 @@ package dev.elliotjarnit.ElliotChess.Pieces;
 
 import dev.elliotjarnit.ElliotChess.Board;
 import dev.elliotjarnit.ElliotChess.Piece;
-import dev.elliotjarnit.ElliotEngine.Graphics.EColor;
-import dev.elliotjarnit.ElliotEngine.Handlers.FileHandler;
-import dev.elliotjarnit.ElliotEngine.Handlers.ObjHandler;
-import dev.elliotjarnit.ElliotEngine.Objects.EFace;
-import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
+import dev.elliotjarnit.elliotengine.Graphics.EColor;
+import dev.elliotjarnit.elliotengine.Handlers.FileHandler;
+import dev.elliotjarnit.elliotengine.Handlers.ObjHandler;
+import dev.elliotjarnit.elliotengine.Objects.EFace;
+import dev.elliotjarnit.elliotengine.Utils.Vector2;
 
 import java.io.FileNotFoundException;
 

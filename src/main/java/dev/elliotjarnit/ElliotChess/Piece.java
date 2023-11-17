@@ -1,7 +1,7 @@
 package dev.elliotjarnit.ElliotChess;
-import dev.elliotjarnit.ElliotEngine.Objects.EEntity;
-import dev.elliotjarnit.ElliotEngine.Utils.Vector2;
-import dev.elliotjarnit.ElliotEngine.Utils.Vector3;
+import dev.elliotjarnit.elliotengine.Objects.EEntity;
+import dev.elliotjarnit.elliotengine.Utils.Vector2;
+import dev.elliotjarnit.elliotengine.Utils.Vector3;
 
 public abstract class Piece extends EEntity {
     private final Side side;
