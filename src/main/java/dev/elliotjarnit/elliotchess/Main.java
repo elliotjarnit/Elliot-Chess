@@ -25,6 +25,7 @@ public class Main extends ElliotEngine {
     private EOButton playButton;
     private EOverlay gameOverlay;
     private EOText turnText;
+    private EOText fpsCounter;
     private Piece.Side turn = Piece.Side.WHITE;
 
     public static void main(String[] args) {
@@ -51,6 +52,7 @@ public class Main extends ElliotEngine {
             setupGame();
         } else {
             // Main Menu
+            fpsCounter = new EOText(new Vector2(25, 14), "FPS: ", 14, EColor.WHITE);
             EScene mainMenuScene = new EScene(false);
             mainMenuScene.setSkyColor(EColor.BLACK);
             Skeleton skeleton1 = new Skeleton(new Vector3(6,  -10, 10));
@@ -75,6 +77,7 @@ public class Main extends ElliotEngine {
             });
             mainMenuOverlay.addComponent(title);
             mainMenuOverlay.addComponent(playButton);
+            mainMenuOverlay.addComponent(fpsCounter);
             this.setOverlay(mainMenuOverlay);
         }
     }
@@ -86,6 +89,7 @@ public class Main extends ElliotEngine {
         Vector2 windowSize = this.windowManager.getWindowSize();
         turnText = new EOText(new Vector2(windowSize.x / 2, 50), "White's Turn", 20, EColor.WHITE, EColor.BLACK);
         gameOverlay.addComponent(turnText);
+        gameOverlay.addComponent(fpsCounter);
         this.setOverlay(gameOverlay);
 
         mainScene = new EScene();
@@ -95,14 +99,14 @@ public class Main extends ElliotEngine {
         gameBoard = new Board();
         Table table = new Table(new Vector3(0, -0.5, 0));
         Lamp lamp = new Lamp(new Vector3(0, 12, 150));
-        mainScene.addObject(table);
-        mainScene.addObject(lamp);
-        mainScene.addObject(gameBoard);
+//        mainScene.addObject(table);
+//        mainScene.addObject(lamp);
+//        mainScene.addObject(gameBoard);
         for (BoardSquare square : gameBoard.getBoardSquares()) {
-            mainScene.addObject(square);
+//            mainScene.addObject(square);
         }
         for (Piece piece : gameBoard.getPieces()) {
-            mainScene.addObject(piece);
+//            mainScene.addObject(piece);
         }
 
         whiteCamera = new ECamera(new Vector3(-151, 124, -1));
@@ -119,6 +123,8 @@ public class Main extends ElliotEngine {
 
     @Override
     public void loop() {
+        fpsCounter.setText("FPS: " + this.renderer.getFPS());
+
         if (title != null) {
             title.setPosition(new Vector2(this.windowManager.getWindowSize().x / 2, this.windowManager.getWindowSize().y / 4));
             playButton.setPosition(new Vector2(this.windowManager.getWindowSize().x / 2, this.windowManager.getWindowSize().y / 2 - 15));
