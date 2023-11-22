@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 public class Skeleton extends EObject {
     public Skeleton(Vector3 origin) {
         super(origin);
+        System.out.println("Skeleton");
 
         try {
             String[] data = FileHandler.loadFileFromResources("Skeleton.obj");
