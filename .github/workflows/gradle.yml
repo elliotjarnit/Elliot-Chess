@@ -29,6 +29,9 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     - name: Build with Gradle
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_USERNAME: ${{ secrets.GH_USERNAME }}
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
       with:
         arguments: build

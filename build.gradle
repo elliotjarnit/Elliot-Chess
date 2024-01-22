@@ -7,8 +7,8 @@ plugins {
 if (file('secrets.gradle').exists()) {
     apply from: 'secrets.gradle'
 } else {
-    GH_USERNAME = "$System.env.GH_USERNAME"
-    GH_TOKEN = "$System.env.GH_TOKEN"
+    project.ext.GH_USERNAME = "$System.env.GH_USERNAME"
+    project.ext.GH_TOKEN = "$System.env.GH_TOKEN"
 }
 
 
