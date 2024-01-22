@@ -16,7 +16,7 @@ public class Bishop extends Piece {
         super(side, boardPosition);
 
         try {
-            String[] data = FileHandler.loadFileFromResources("Bishop.obj");
+            String[] data = FileHandler.loadFileFromResources("bishop.obj");
             EFace[] faces = ObjHandler.loadData(data);
             for (EFace face : faces) {
                 face.setColor(side == Side.WHITE ? EColor.WHITE : EColor.BLACK);

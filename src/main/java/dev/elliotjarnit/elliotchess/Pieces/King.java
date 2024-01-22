@@ -17,7 +17,7 @@ public class King extends Piece
         super(side, boardPosition);
 
         try {
-            String[] data = FileHandler.loadFileFromResources("King.obj");
+            String[] data = FileHandler.loadFileFromResources("king.obj");
             EFace[] faces = ObjHandler.loadData(data);
             for (EFace face : faces) {
                 face.setColor(side == Side.WHITE ? EColor.WHITE : EColor.BLACK);

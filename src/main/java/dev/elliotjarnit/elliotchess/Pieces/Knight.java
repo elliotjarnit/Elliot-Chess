@@ -16,7 +16,7 @@ public class Knight extends Piece {
         super(side, boardPosition);
 
         try {
-            String[] data = FileHandler.loadFileFromResources("Knight.obj");
+            String[] data = FileHandler.loadFileFromResources("knight.obj");
             EFace[] faces = ObjHandler.loadData(data);
             for (EFace face : faces) {
                 face.setColor(side == Side.WHITE ? EColor.WHITE : EColor.BLACK);

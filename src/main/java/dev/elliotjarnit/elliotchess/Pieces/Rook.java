@@ -17,7 +17,7 @@ public class Rook extends Piece
         super(side, boardPosition);
 
         try {
-            String[] data = FileHandler.loadFileFromResources("Rook.obj");
+            String[] data = FileHandler.loadFileFromResources("rook.obj");
             EFace[] faces = ObjHandler.loadData(data);
             for (EFace face : faces) {
                 face.setColor(side == Side.WHITE ? EColor.WHITE : EColor.BLACK);

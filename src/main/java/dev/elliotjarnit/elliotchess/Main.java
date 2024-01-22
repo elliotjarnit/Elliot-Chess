@@ -43,7 +43,12 @@ public class Main extends ElliotEngine {
         this.setOption(Options.VERSION, "1.0.0");
         this.setOption(Options.AUTHOR, "Elliot Jarnit, Jeremy Rowell");
         this.setOption(Options.LICENSE, "None");
-//        this.setOption(AdvancedOptions.WIRE_FRAME, "true");
+        // Check if running from jar
+        if (this.getClass().getResource("Main.class").toString().startsWith("jar")) {
+            this.setOption(Options.LOADING_SCREEN, "true");
+        } else {
+            this.setOption(Options.LOADING_SCREEN, "false");
+        }
     }
 
     @Override
@@ -79,45 +84,45 @@ public class Main extends ElliotEngine {
             mainMenuOverlay.addComponent(playButton);
             mainMenuOverlay.addComponent(fpsCounter);
             this.setOverlay(mainMenuOverlay);
+
+            // Main Scene
+            mainScene = new EScene(false);
+            mainScene.setSkyColor(EColor.LIGHT_BLUE);
+            Table table = new Table(new Vector3(0, -0.5, 0));
+            Lamp lamp = new Lamp(new Vector3(0, 12, 150));
+            mainScene.addObject(table);
+            mainScene.addObject(lamp);
+
+            // Game Board
+            this.gameBoard = new Board();
+            for (BoardSquare square : this.gameBoard.getBoardSquares()) {
+                mainScene.addObject(square);
+            }
+            for (Piece piece : this.gameBoard.getPieces()) {
+                mainScene.addObject(piece);
+            }
+
+            whiteCamera = new ECamera(new Vector3(-151, 124, -1));
+            whiteCamera.setRotationDegrees(new Vector2(-43, 91));
+            blackCamera = new ECamera(new Vector3(151, 124, -1));
+            blackCamera.setRotationDegrees(new Vector2(-43, 269));
+            currentCamera = blackCamera;
+
+            mainScene.addObject(this.gameBoard);
+            mainScene.setCamera(currentCamera);
+
+            // Game Overlay
+            gameOverlay = new EOverlay();
+            turnText = new EOText(new Vector2(windowSize.x / 2, 50), "White's Turn", 20, EColor.WHITE, EColor.BLACK);
+            gameOverlay.addComponent(turnText);
+            gameOverlay.addComponent(fpsCounter);
         }
     }
 
     public void setupGame() {
         if (freeMove) this.inputManager.takeoverMouse();
 
-        gameOverlay = new EOverlay();
-        Vector2 windowSize = this.windowManager.getWindowSize();
-        turnText = new EOText(new Vector2(windowSize.x / 2, 50), "White's Turn", 20, EColor.WHITE, EColor.BLACK);
-        gameOverlay.addComponent(turnText);
-        gameOverlay.addComponent(fpsCounter);
         this.setOverlay(gameOverlay);
-
-        mainScene = new EScene();
-        mainScene.setSkyColor(EColor.LIGHT_BLUE);
-//        camera = new ECamera(new Vector3(-88, 65, -52));
-//        camera.setRotationDegrees(new Vector2(-34.2, 62.5));
-        gameBoard = new Board();
-        Table table = new Table(new Vector3(0, -0.5, 0));
-        Lamp lamp = new Lamp(new Vector3(0, 12, 150));
-//        mainScene.addObject(table);
-//        mainScene.addObject(lamp);
-//        mainScene.addObject(gameBoard);
-        for (BoardSquare square : gameBoard.getBoardSquares()) {
-//            mainScene.addObject(square);
-        }
-        for (Piece piece : gameBoard.getPieces()) {
-//            mainScene.addObject(piece);
-        }
-
-        whiteCamera = new ECamera(new Vector3(-151, 124, -1));
-        whiteCamera.setRotationDegrees(new Vector2(-43, 91));
-
-        blackCamera = new ECamera(new Vector3(151, 124, -1));
-        blackCamera.setRotationDegrees(new Vector2(-43, 269));
-
-        currentCamera = blackCamera;
-
-        mainScene.setCamera(currentCamera);
         this.setScene(mainScene);
     }
 
@@ -185,11 +190,10 @@ public class Main extends ElliotEngine {
 
         }
 
-        Vector2 mousePos = this.inputManager.getMousePos();
-
         if (this.inputManager.isMouseDown(InputManager.MouseButton.LEFT)) {
-//            EObject object = this.renderer.getLookingAtObject(mousePos);
-            EObject object = null;
+            Vector2 mousePos = this.inputManager.getMousePos();
+            EObject object = this.renderer.getObjectAtPoint(mousePos);
+//            EObject object = null;
 
             if (object instanceof BoardSquare) {
                 if (selectedPiece != null) {
@@ -207,6 +211,7 @@ public class Main extends ElliotEngine {
             } else {
                 if (selectedPiece != null) selectedPiece.setColor(selectedPiece.getSide() == Piece.Side.WHITE ? EColor.WHITE : EColor.BLACK);
                 selectedPiece = null;
+                setAvailableMoves();
                 if (object instanceof Piece) {
                     if (((Piece) object).getSide() != turn) return;
                     selectedPiece = (Piece) object;
