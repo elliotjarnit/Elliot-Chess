@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   build:
-
+    permissions: write-all
     runs-on: ubuntu-latest
 
     steps:
@@ -44,6 +44,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        file: "staging/ElliotChess.jar"
+        file: "staging/*.jar"
         update_latest_release: true
         overwrite: true
