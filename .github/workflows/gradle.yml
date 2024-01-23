@@ -28,6 +28,8 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+    - name: Create staging directory
+      run: mkdir -p staging
     - name: Build Game with Gradle
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
