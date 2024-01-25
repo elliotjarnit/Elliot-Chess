@@ -38,7 +38,7 @@ jobs:
       with:
         arguments: build
     - name: Rename jar
-      run: mv build/libs/elliotchess-all.jar staging/ElliotChess.jar
+      run: mv build/libs/*-all.jar staging/ElliotChess.jar
     - name: Upload to Github Releases
       uses: xresloader/upload-to-github-release@v1
       env:
